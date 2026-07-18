@@ -9,6 +9,7 @@ question* about your server. Ran side-by-side where possible (July 2026).
 | [mcp-lint](https://www.npmjs.com/package/mcp-lint) | *Do your schemas parse correctly in every client?* — Claude/Cursor/Gemini/OpenAI-strict quirks, autofix, compat matrix | small (both flag missing param descriptions, deep nesting) |
 | [mcp-compliance](https://github.com/YawLabs/mcp-compliance) | *Does your server implement the MCP spec correctly?* — transport, lifecycle, protocol conformance | none |
 | [MCP Inspector](https://github.com/modelcontextprotocol/inspector) | *What does my server expose right now?* — manual, exploratory debugging UI | none (different job) |
+| [mcp-observatory](https://github.com/KryptosAI/mcp-observatory) | *Is your server healthy and safe to depend on?* — CI gate, tool invocation checks, schema drift, record/replay, security scanning (injection surfaces, over-broad access) | none — its 0–100 health score measures whether the server *runs*; mcpgrade measures whether a model *uses it well*. A server can score 100 there and F here (and vice versa) |
 | MCPSpec | *Did this release change behavior?* — record/replay regression diffing | none |
 
 ## The concrete difference, on one file
