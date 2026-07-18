@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP Server Agent-Usability Leaderboard · mcplint</title>
+<meta name="description" content="A-F agent-usability scores for 36 popular MCP servers, measured by mcplint.">
+<style>
+:root{--bg:#fff;--text:#1a1a1a;--muted:#6b6b6b;--border:#e5e5e5;--code:#f6f6f6;color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--text:#e8e8e8;--muted:#9a9a9a;--border:#2a2a2a;--code:#1e1e1e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:64rem;margin:0 auto;padding:2.5rem 1rem 4rem}
+h1{font-size:1.5rem;margin:0 0 .3rem}
+.sub{color:var(--muted);font-size:.9rem;margin-bottom:1.6rem}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{border-bottom:1px solid var(--border);padding:.45rem .55rem;text-align:right;white-space:nowrap}
+th{cursor:pointer;user-select:none;position:sticky;top:0;background:var(--bg)}
+th:hover{color:#0b63c4}
+td.name,th.name{text-align:left;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem}
+.grade{display:inline-block;min-width:1.6em;text-align:center;padding:.05em .35em;border-radius:5px;font-weight:700;color:#fff}
+.grade.a{background:#1a7f37}.grade.b{background:#4d9375}.grade.c{background:#bf8700}.grade.d{background:#d4640c}.grade.f{background:#cf222e}
+.failed{color:var(--muted);font-size:.85rem;margin-top:1.2rem}
+footer{margin-top:2.5rem;color:var(--muted);font-size:.85rem}
+a{color:#0b63c4}
+</style>
+</head>
+<body>
+<main>
+<h1>MCP Server Agent-Usability Leaderboard</h1>
+<div class="sub">36 servers · scanned 2026-07-18 by <a href="https://github.com/TengByte/mcplint">mcplint</a> (static rules) · point-in-time snapshot · click headers to sort ·
+fixed your score? <a href="https://github.com/TengByte/mcplint/issues">request a re-scan</a></div>
+<table id="lb">
+<thead><tr>
+<th>#</th><th class="name">Server</th><th>Grade</th><th>Score</th><th>Tools</th><th>Errors</th><th>Warnings</th><th>Desc</th><th>Schema</th><th>Naming</th><th>Token</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1</td>
+<td class="name">@modelcontextprotocol/server-everart</td>
+<td><span class="grade a">A</span></td>
+<td data-v="100">100</td>
+<td data-v="1">1</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>2</td>
+<td class="name">@modelcontextprotocol/server-brave-search</td>
+<td><span class="grade a">A</span></td>
+<td data-v="99">99</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="95">95</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>3</td>
+<td class="name">exa-mcp-server</td>
+<td><span class="grade a">A</span></td>
+<td data-v="98">98</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="100">100</td>
+<td data-v="95">95</td>
+<td data-v="95">95</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>4</td>
+<td class="name">server-perplexity-ask</td>
+<td><span class="grade a">A</span></td>
+<td data-v="97">97</td>
+<td data-v="1">1</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="100">100</td>
+<td data-v="90">90</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>5</td>
+<td class="name">@shopify/dev-mcp</td>
+<td><span class="grade a">A</span></td>
+<td data-v="97">97</td>
+<td data-v="5">5</td>
+<td data-v="0">0</td>
+<td data-v="1">1</td>
+<td data-v="100">100</td>
+<td data-v="94">94</td>
+<td data-v="100">100</td>
+<td data-v="92">92</td>
+</tr>
+<tr>
+<td>6</td>
+<td class="name">@modelcontextprotocol/server-aws-kb-retrieval</td>
+<td><span class="grade a">A</span></td>
+<td data-v="97">97</td>
+<td data-v="1">1</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="90">90</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>7</td>
+<td class="name">mcp-shrimp-task-manager</td>
+<td><span class="grade a">A</span></td>
+<td data-v="96">96</td>
+<td data-v="15">15</td>
+<td data-v="0">0</td>
+<td data-v="1">1</td>
+<td data-v="93">93</td>
+<td data-v="97">97</td>
+<td data-v="99">99</td>
+<td data-v="97">97</td>
+</tr>
+<tr>
+<td>8</td>
+<td class="name">@modelcontextprotocol/server-slack</td>
+<td><span class="grade a">A</span></td>
+<td data-v="95">95</td>
+<td data-v="8">8</td>
+<td data-v="0">0</td>
+<td data-v="2">2</td>
+<td data-v="93">93</td>
+<td data-v="90">90</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>9</td>
+<td class="name">@modelcontextprotocol/server-google-maps</td>
+<td><span class="grade a">A</span></td>
+<td data-v="95">95</td>
+<td data-v="7">7</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="90">90</td>
+<td data-v="94">94</td>
+<td data-v="97">97</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>10</td>
+<td class="name">@elastic/mcp-server-elasticsearch</td>
+<td><span class="grade a">A</span></td>
+<td data-v="94">94</td>
+<td data-v="4">4</td>
+<td data-v="0">0</td>
+<td data-v="1">1</td>
+<td data-v="93">93</td>
+<td data-v="88">88</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>11</td>
+<td class="name">@apify/actors-mcp-server</td>
+<td><span class="grade a">A</span></td>
+<td data-v="93">93</td>
+<td data-v="10">10</td>
+<td data-v="1">1</td>
+<td data-v="4">4</td>
+<td data-v="95">95</td>
+<td data-v="96">96</td>
+<td data-v="100">100</td>
+<td data-v="74">74</td>
+</tr>
+<tr>
+<td>12</td>
+<td class="name">@openbnb/mcp-server-airbnb</td>
+<td><span class="grade a">A</span></td>
+<td data-v="91">91</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="1">1</td>
+<td data-v="90">90</td>
+<td data-v="80">80</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>13</td>
+<td class="name">tavily-mcp</td>
+<td><span class="grade a">A</span></td>
+<td data-v="90">90</td>
+<td data-v="5">5</td>
+<td data-v="1">1</td>
+<td data-v="2">2</td>
+<td data-v="98">98</td>
+<td data-v="78">78</td>
+<td data-v="78">78</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>14</td>
+<td class="name">figma-developer-mcp</td>
+<td><span class="grade a">A</span></td>
+<td data-v="90">90</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="1">1</td>
+<td data-v="90">90</td>
+<td data-v="75">75</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>15</td>
+<td class="name">@modelcontextprotocol/server-gitlab</td>
+<td><span class="grade a">A</span></td>
+<td data-v="90">90</td>
+<td data-v="9">9</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="70">70</td>
+<td data-v="97">97</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>16</td>
+<td class="name">n8n-mcp</td>
+<td><span class="grade b">B</span></td>
+<td data-v="89">89</td>
+<td data-v="7">7</td>
+<td data-v="0">0</td>
+<td data-v="4">4</td>
+<td data-v="93">93</td>
+<td data-v="71">71</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>17</td>
+<td class="name">@sentry/mcp-server</td>
+<td><span class="grade b">B</span></td>
+<td data-v="88">88</td>
+<td data-v="9">9</td>
+<td data-v="0">0</td>
+<td data-v="10">10</td>
+<td data-v="98">98</td>
+<td data-v="68">68</td>
+<td data-v="100">100</td>
+<td data-v="91">91</td>
+</tr>
+<tr>
+<td>18</td>
+<td class="name">@executeautomation/playwright-mcp-server</td>
+<td><span class="grade b">B</span></td>
+<td data-v="85">85</td>
+<td data-v="33">33</td>
+<td data-v="11">11</td>
+<td data-v="8">8</td>
+<td data-v="56">56</td>
+<td data-v="98">98</td>
+<td data-v="94">94</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>19</td>
+<td class="name">@playwright/mcp</td>
+<td><span class="grade b">B</span></td>
+<td data-v="82">82</td>
+<td data-v="24">24</td>
+<td data-v="12">12</td>
+<td data-v="5">5</td>
+<td data-v="54">54</td>
+<td data-v="90">90</td>
+<td data-v="91">91</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>20</td>
+<td class="name">@hubspot/mcp-server</td>
+<td><span class="grade b">B</span></td>
+<td data-v="82">82</td>
+<td data-v="21">21</td>
+<td data-v="1">1</td>
+<td data-v="24">24</td>
+<td data-v="97">97</td>
+<td data-v="48">48</td>
+<td data-v="100">100</td>
+<td data-v="93">93</td>
+</tr>
+<tr>
+<td>21</td>
+<td class="name">@modelcontextprotocol/server-puppeteer</td>
+<td><span class="grade b">B</span></td>
+<td data-v="81">81</td>
+<td data-v="7">7</td>
+<td data-v="4">4</td>
+<td data-v="0">0</td>
+<td data-v="39">39</td>
+<td data-v="99">99</td>
+<td data-v="99">99</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>22</td>
+<td class="name">mcp-server-kubernetes</td>
+<td><span class="grade c">C</span></td>
+<td data-v="79">79</td>
+<td data-v="23">23</td>
+<td data-v="10">10</td>
+<td data-v="10">10</td>
+<td data-v="52">52</td>
+<td data-v="81">81</td>
+<td data-v="95">95</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>23</td>
+<td class="name">@modelcontextprotocol/server-memory</td>
+<td><span class="grade c">C</span></td>
+<td data-v="78">78</td>
+<td data-v="9">9</td>
+<td data-v="4">4</td>
+<td data-v="3">3</td>
+<td data-v="46">46</td>
+<td data-v="79">79</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>24</td>
+<td class="name">@upstash/context7-mcp</td>
+<td><span class="grade c">C</span></td>
+<td data-v="70">70</td>
+<td data-v="2">2</td>
+<td data-v="4">4</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>25</td>
+<td class="name">@modelcontextprotocol/server-filesystem</td>
+<td><span class="grade d">D</span></td>
+<td data-v="69">69</td>
+<td data-v="14">14</td>
+<td data-v="18">18</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="97">97</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>26</td>
+<td class="name">@modelcontextprotocol/server-sequential-thinking</td>
+<td><span class="grade d">D</span></td>
+<td data-v="69">69</td>
+<td data-v="1">1</td>
+<td data-v="2">2</td>
+<td data-v="1">1</td>
+<td data-v="100">100</td>
+<td data-v="0">0</td>
+<td data-v="90">90</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>27</td>
+<td class="name">airtable-mcp-server</td>
+<td><span class="grade d">D</span></td>
+<td data-v="69">69</td>
+<td data-v="16">16</td>
+<td data-v="66">66</td>
+<td data-v="1">1</td>
+<td data-v="0">0</td>
+<td data-v="96">96</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>28</td>
+<td class="name">mcp-obsidian</td>
+<td><span class="grade d">D</span></td>
+<td data-v="69">69</td>
+<td data-v="2">2</td>
+<td data-v="2">2</td>
+<td data-v="0">0</td>
+<td data-v="0">0</td>
+<td data-v="95">95</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>29</td>
+<td class="name">@modelcontextprotocol/server-github</td>
+<td><span class="grade d">D</span></td>
+<td data-v="67">67</td>
+<td data-v="26">26</td>
+<td data-v="44">44</td>
+<td data-v="5">5</td>
+<td data-v="0">0</td>
+<td data-v="91">91</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>30</td>
+<td class="name">todoist-mcp-server</td>
+<td><span class="grade d">D</span></td>
+<td data-v="67">67</td>
+<td data-v="33">33</td>
+<td data-v="110">110</td>
+<td data-v="6">6</td>
+<td data-v="0">0</td>
+<td data-v="92">92</td>
+<td data-v="97">97</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>31</td>
+<td class="name">@modelcontextprotocol/server-everything</td>
+<td><span class="grade d">D</span></td>
+<td data-v="66">66</td>
+<td data-v="13">13</td>
+<td data-v="13">13</td>
+<td data-v="4">4</td>
+<td data-v="0">0</td>
+<td data-v="88">88</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>32</td>
+<td class="name">mongodb-mcp-server</td>
+<td><span class="grade d">D</span></td>
+<td data-v="66">66</td>
+<td data-v="25">25</td>
+<td data-v="66">66</td>
+<td data-v="5">5</td>
+<td data-v="0">0</td>
+<td data-v="86">86</td>
+<td data-v="99">99</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>33</td>
+<td class="name">@notionhq/notion-mcp-server</td>
+<td><span class="grade d">D</span></td>
+<td data-v="62">62</td>
+<td data-v="24">24</td>
+<td data-v="33">33</td>
+<td data-v="54">54</td>
+<td data-v="0">0</td>
+<td data-v="92">92</td>
+<td data-v="95">95</td>
+<td data-v="94">94</td>
+</tr>
+<tr>
+<td>34</td>
+<td class="name">@suekou/mcp-notion-server</td>
+<td><span class="grade d">D</span></td>
+<td data-v="62">62</td>
+<td data-v="31">31</td>
+<td data-v="81">81</td>
+<td data-v="14">14</td>
+<td data-v="0">0</td>
+<td data-v="75">75</td>
+<td data-v="100">100</td>
+<td data-v="95">95</td>
+</tr>
+<tr>
+<td>35</td>
+<td class="name">@modelcontextprotocol/server-postgres</td>
+<td><span class="grade f">F</span></td>
+<td data-v="58">58</td>
+<td data-v="1">1</td>
+<td data-v="2">2</td>
+<td data-v="1">1</td>
+<td data-v="0">0</td>
+<td data-v="60">60</td>
+<td data-v="100">100</td>
+<td data-v="100">100</td>
+</tr>
+<tr>
+<td>36</td>
+<td class="name">firecrawl-mcp</td>
+<td><span class="grade f">F</span></td>
+<td data-v="57">57</td>
+<td data-v="26">26</td>
+<td data-v="134">134</td>
+<td data-v="16">16</td>
+<td data-v="0">0</td>
+<td data-v="63">63</td>
+<td data-v="96">96</td>
+<td data-v="90">90</td>
+</tr>
+</tbody>
+</table>
+<p class="failed">Could not scan with dummy credentials (excluded, not graded): @stripe/mcp · @supabase/mcp-server-supabase · @modelcontextprotocol/server-redis</p>
+<footer>Scores weight descriptions 30% · schema 30% · naming 15% · token cost 15% · consistency 10%, density-normalized by tool count.
+Methodology &amp; rule rationale: <a href="https://github.com/TengByte/mcplint/blob/main/docs/rules.md">docs/rules.md</a></footer>
+</main>
+<script>
+document.querySelectorAll("#lb th").forEach((th,i)=>{
+  th.addEventListener("click",()=>{
+    const tb=document.querySelector("#lb tbody");
+    const dir=th.dataset.dir==="asc"?-1:1;th.dataset.dir=dir===1?"asc":"desc";
+    [...tb.rows].sort((a,b)=>{
+      const av=a.cells[i].dataset.v??a.cells[i].textContent, bv=b.cells[i].dataset.v??b.cells[i].textContent;
+      const an=parseFloat(av), bn=parseFloat(bv);
+      return (isNaN(an)||isNaN(bn)) ? av.localeCompare(bv)*-dir : (bn-an)*dir;
+    }).forEach(r=>tb.appendChild(r));
+  });
+});
+</script>
+</body>
+</html>
