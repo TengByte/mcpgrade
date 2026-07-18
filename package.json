@@ -1,7 +1,7 @@
 {
   "name": "mcplint",
   "version": "0.1.0",
-  "description": "Lighthouse for MCP servers — lint your MCP server for agent usability, not just spec compliance",
+  "description": "Lighthouse for MCP servers \u2014 lint your MCP server for agent usability, not just spec compliance",
   "type": "module",
   "bin": {
     "mcplint": "dist/cli.js"
@@ -43,5 +43,14 @@
     "tsx": "^4.19.0",
     "typescript": "^5.5.0",
     "vitest": "^2.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TengByte/mcplint.git"
+  },
+  "homepage": "https://github.com/TengByte/mcplint#readme",
+  "bugs": {
+    "url": "https://github.com/TengByte/mcplint/issues"
+  },
+  "author": "Teng Li <tengli.global@gmail.com> (https://tengli.dev)"
 }
