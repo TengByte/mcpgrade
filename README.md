@@ -56,7 +56,7 @@ I integrate first-party and third-party MCP connectors into a production AI agen
 
 ## mcpgrade vs mcp-lint
 
-Different tools, different questions. [mcp-lint](https://www.npmjs.com/package/mcp-lint) checks whether your tool schemas *parse correctly* across clients (Claude, Cursor, OpenAI strict mode, ...) — syntax-level compatibility. mcpgrade measures whether a model can actually *use* your tools — description quality, naming confusion, token economics, and live LLM tool-selection accuracy. A server can pass mcp-lint cleanly and still score an F here, and vice versa. They compose well: lint for compatibility, grade for usability.
+Different tools, different questions. [mcp-lint](https://www.npmjs.com/package/mcp-lint) checks whether your tool schemas *parse correctly* across clients (Claude, Cursor, OpenAI strict mode, ...) — syntax-level compatibility. mcpgrade measures whether a model can actually *use* your tools — description quality, naming confusion, token economics, and live LLM tool-selection accuracy. A server can pass mcp-lint cleanly and still score an F here, and vice versa. They compose well: lint for compatibility, grade for usability. Full side-by-side with concrete outputs: [docs/comparison.md](docs/comparison.md).
 
 ## Roadmap
 
