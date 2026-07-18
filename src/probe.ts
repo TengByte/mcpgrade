@@ -43,7 +43,7 @@ export async function makeStdioCaller(command: string): Promise<ProbeCaller> {
   const env = Object.fromEntries(
     Object.entries(process.env).filter(([, v]) => v !== undefined),
   ) as Record<string, string>;
-  const client = new Client({ name: "mcplint-probe", version: "0.1.0" });
+  const client = new Client({ name: "mcpgrade-probe", version: "0.1.0" });
   await client.connect(new StdioClientTransport({ command: cmd, args, env }));
   return {
     async callTool(name, callArgs) {

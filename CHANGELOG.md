@@ -12,6 +12,6 @@ Initial release.
   C004 schema-not-enforced)
 - `--eval` (beta): LLM-powered tool-selection accuracy testing with synthetic
   tasks, argument validation, and confusion pairs; `--eval-mock` for offline runs
-- `--json`, `--fail-on <severity>` for CI; `.mcplintrc.json` config;
+- `--json`, `--fail-on <severity>` for CI; `.mcpgraderc.json` config;
   `--disable <rules>`; `rules` / `rules explain` commands
 - GitHub Action (composite) via `action.yml`

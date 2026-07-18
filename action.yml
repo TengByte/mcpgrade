@@ -1,4 +1,4 @@
-name: "mcplint"
+name: "mcpgrade"
 description: "Lint your MCP server for agent usability — descriptions, schema design, naming, token cost"
 branding:
   icon: "check-circle"
@@ -12,13 +12,13 @@ inputs:
     required: false
     default: "error"
   args:
-    description: "Extra CLI flags, e.g. --disable S008 --config .mcplintrc.json"
+    description: "Extra CLI flags, e.g. --disable S008 --config .mcpgraderc.json"
     required: false
     default: ""
 runs:
   using: "composite"
   steps:
-    - name: Run mcplint
+    - name: Run mcpgrade
       shell: bash
       run: |
-        npx --yes mcplint "${{ inputs.target }}" --fail-on "${{ inputs.fail-on }}" ${{ inputs.args }}
+        npx --yes mcpgrade "${{ inputs.target }}" --fail-on "${{ inputs.fail-on }}" ${{ inputs.args }}

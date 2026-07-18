@@ -1,11 +1,11 @@
-# mcplint
+# mcpgrade
 
-> **Lighthouse for MCP servers.** Your server can be 100% spec-compliant and still fail agents — vague descriptions, token-bloated schemas, confusable tool names. mcplint scores what compliance checkers can't: whether an LLM can actually use your tools.
+> **Lighthouse for MCP servers.** Your server can be 100% spec-compliant and still fail agents — vague descriptions, token-bloated schemas, confusable tool names. mcpgrade scores what compliance checkers can't: whether an LLM can actually use your tools.
 
 ```bash
-npx mcplint https://your-server.example.com/mcp   # streamable HTTP
-npx mcplint --stdio "node ./my-server.js"          # local stdio server
-npx mcplint --snapshot tools.json                  # saved tools/list output
+npx mcpgrade https://your-server.example.com/mcp   # streamable HTTP
+npx mcpgrade --stdio "node ./my-server.js"          # local stdio server
+npx mcpgrade --snapshot tools.json                  # saved tools/list output
 ```
 
 Zero config. No API key. Report in seconds.
@@ -24,7 +24,7 @@ Every finding comes with a concrete fix. Scores are density-normalized: 3 broken
 ## Example
 
 ```
-mcplint — agent usability report
+mcpgrade — agent usability report
 target: examples/bad-server.json · 4 tools
 
   F   28/100
@@ -43,15 +43,20 @@ target: examples/bad-server.json · 4 tools
 ## CI
 
 ```bash
-mcplint <target> --json                # machine-readable
-mcplint <target> --fail-on error       # exit 1 on errors — gate your PRs
-mcplint <target> --disable S008,N001   # tune rules
-mcplint rules                          # list all rules
+mcpgrade <target> --json                # machine-readable
+mcpgrade <target> --fail-on error       # exit 1 on errors — gate your PRs
+mcpgrade <target> --disable S008,N001   # tune rules
+mcpgrade rules                          # list all rules
 ```
 
 ## Why
 
 I integrate first-party and third-party MCP connectors into a production AI agent for a living. Most MCP servers fail agents in the same ten ways — none of which show up in a spec compliance check. So I wrote the linter I wished server authors had run before shipping.
+
+
+## mcpgrade vs mcp-lint
+
+Different tools, different questions. [mcp-lint](https://www.npmjs.com/package/mcp-lint) checks whether your tool schemas *parse correctly* across clients (Claude, Cursor, OpenAI strict mode, ...) — syntax-level compatibility. mcpgrade measures whether a model can actually *use* your tools — description quality, naming confusion, token economics, and live LLM tool-selection accuracy. A server can pass mcp-lint cleanly and still score an F here, and vice versa. They compose well: lint for compatibility, grade for usability.
 
 ## Roadmap
 

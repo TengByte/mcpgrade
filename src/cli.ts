@@ -10,7 +10,7 @@ import { renderJson, renderTerminal } from "./report.js";
 const program = new Command();
 
 program
-  .name("mcplint")
+  .name("mcpgrade")
   .description("Lighthouse for MCP servers — lint for agent usability, not just spec compliance")
   .version("0.1.0");
 
@@ -21,11 +21,11 @@ program
   .option("--json", "machine-readable JSON output")
   .option("--fail-on <severity>", "exit 1 if findings at/above severity exist (error|warn|info)")
   .option("--disable <rules>", "comma-separated rule IDs to disable")
-  .option("--config <file>", "path to .mcplintrc.json")
+  .option("--config <file>", "path to .mcpgraderc.json")
   .option("--probe", "live-probe error quality: call tools with invalid args (stdio targets only)")
   .option("--eval", "run LLM-powered tool-selection eval (needs ANTHROPIC_API_KEY)")
   .option("--eval-model <model>", "model for --eval (default: claude-haiku-4-5-20251001)")
-  .option("--eval-base-url <url>", "OpenAI-compatible endpoint (DeepSeek/Qwen/OpenRouter/...); key via MCPLINT_EVAL_API_KEY or OPENAI_API_KEY")
+  .option("--eval-base-url <url>", "OpenAI-compatible endpoint (DeepSeek/Qwen/OpenRouter/...); key via MCPGRADE_EVAL_API_KEY or OPENAI_API_KEY")
   .option("--eval-mock", "run eval with the offline mock client (for testing the harness)")
   .action(async (target: string | undefined, opts) => {
     try {
@@ -62,8 +62,8 @@ program
           : opts.evalBaseUrl
             ? openaiCompatClient({
                 baseUrl: opts.evalBaseUrl,
-                apiKey: process.env.MCPLINT_EVAL_API_KEY ?? process.env.OPENAI_API_KEY ?? (() => {
-                  throw new Error("--eval-base-url needs MCPLINT_EVAL_API_KEY (or OPENAI_API_KEY)");
+                apiKey: process.env.MCPGRADE_EVAL_API_KEY ?? process.env.OPENAI_API_KEY ?? (() => {
+                  throw new Error("--eval-base-url needs MCPGRADE_EVAL_API_KEY (or OPENAI_API_KEY)");
                 })(),
                 model: opts.evalModel ?? (() => {
                   throw new Error("--eval-base-url needs --eval-model (e.g. deepseek-chat)");
@@ -95,7 +95,7 @@ program
         process.exit(hit ? 1 : 0);
       }
     } catch (err) {
-      console.error(chalk.red(`mcplint: ${err instanceof Error ? err.message : err}`));
+      console.error(chalk.red(`mcpgrade: ${err instanceof Error ? err.message : err}`));
       process.exit(2);
     }
   });

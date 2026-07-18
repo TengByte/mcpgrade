@@ -9,7 +9,7 @@ Set Height 640
 Set Theme "Catppuccin Mocha"
 Set TypingSpeed 40ms
 
-Type "npx mcplint examples/bad-server.json"
+Type "npx mcpgrade examples/bad-server.json"
 Sleep 500ms
 Enter
 Sleep 4s
@@ -17,11 +17,11 @@ Sleep 4s
 # 报告滚到顶部展示总分
 Type "clear"
 Enter
-Type "# A spec-compliant server can still fail agents. mcplint scores what compliance checks can't."
+Type "# A spec-compliant server can still fail agents. mcpgrade scores what compliance checks can't."
 Sleep 2s
 Enter
 
-Type "npx mcplint --stdio 'npx -y @modelcontextprotocol/server-memory'"
+Type "npx mcpgrade --stdio 'npx -y @modelcontextprotocol/server-memory'"
 Sleep 500ms
 Enter
 Sleep 6s

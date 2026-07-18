@@ -1,4 +1,4 @@
-# MCP Server Agent-Usability Leaderboard (mcplint v0.1)
+# MCP Server Agent-Usability Leaderboard (mcpgrade v0.1)
 
 Scanned: 2026-07-18 · static rules only · point-in-time snapshot
 

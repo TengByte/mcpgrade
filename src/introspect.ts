@@ -17,7 +17,7 @@ export async function snapshotFromHttp(url: string): Promise<ServerSnapshot> {
   const { StreamableHTTPClientTransport } = await import(
     "@modelcontextprotocol/sdk/client/streamableHttp.js"
   );
-  const client = new Client({ name: "mcplint", version: "0.1.0" });
+  const client = new Client({ name: "mcpgrade", version: "0.1.0" });
   const transport = new StreamableHTTPClientTransport(new URL(url));
   await client.connect(transport);
   try {
@@ -39,7 +39,7 @@ export async function snapshotFromStdio(command: string): Promise<ServerSnapshot
     "@modelcontextprotocol/sdk/client/stdio.js"
   );
   const [cmd, ...args] = command.split(/\s+/);
-  const client = new Client({ name: "mcplint", version: "0.1.0" });
+  const client = new Client({ name: "mcpgrade", version: "0.1.0" });
   // Pass through the full environment: real servers need their API keys etc.
   const env = Object.fromEntries(
     Object.entries(process.env).filter(([, v]) => v !== undefined),

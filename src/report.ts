@@ -28,7 +28,7 @@ export function renderTerminal(report: Report): string {
   const lines: string[] = [];
   const gc = gradeColor(report.grade);
   lines.push("");
-  lines.push(chalk.bold("mcplint") + chalk.dim(` — agent usability report`));
+  lines.push(chalk.bold("mcpgrade") + chalk.dim(` — agent usability report`));
   lines.push(chalk.dim(`target: ${report.snapshot.source} · ${report.snapshot.toolCount} tools`));
   lines.push("");
   lines.push(gc(chalk.bold(`  ${report.grade}   ${report.totalScore}/100`)));

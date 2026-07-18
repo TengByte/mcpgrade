@@ -88,7 +88,7 @@ const rows = readFileSync(ndjson, "utf8").split("\n").filter(Boolean).map((l) =>
 rows.sort((a, b) => (b.score ?? -1) - (a.score ?? -1));
 
 const lines = [];
-lines.push("# MCP Server Agent-Usability Leaderboard (mcplint v0.1)\n");
+lines.push("# MCP Server Agent-Usability Leaderboard (mcpgrade v0.1)\n");
 lines.push(`Scanned: ${new Date().toISOString().slice(0, 10)} · static rules only · point-in-time snapshot\n`);
 lines.push("| Rank | Server | Grade | Score | Tools | Errors | Warnings | Desc | Schema | Naming | Token |");
 lines.push("|---|---|---|---|---|---|---|---|---|---|---|");

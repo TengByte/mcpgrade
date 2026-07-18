@@ -1,8 +1,8 @@
-# mcplint Rules Reference
+# mcpgrade Rules Reference
 
 Every rule links to its rationale. Disagree? Open an issue — the ruleset is
 opinionated by design, and disputes make it better. Disable any rule with
-`--disable <ID>` or in `.mcplintrc.json`.
+`--disable <ID>` or in `.mcpgraderc.json`.
 
 Severities: **error** (breaks agents) · **warn** (degrades agents) · **info** (polish).
 
@@ -94,7 +94,7 @@ description measurably improves argument construction.
 
 ### T001 · error · Catalog total >8k tokens
 Agents pay your entire tools/list *on every request*. 8k tokens of schemas is
-a tax on every user message. Budget configurable via `.mcplintrc.json`.
+a tax on every user message. Budget configurable via `.mcpgraderc.json`.
 
 ### T002 · warn · Single tool >1.2k tokens
 One bloated schema usually means boilerplate descriptions or over-nested

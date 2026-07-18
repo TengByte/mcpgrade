@@ -14,7 +14,7 @@ function bar(x: number): string {
 export function renderEval(report: EvalReport): string {
   const lines: string[] = [];
   lines.push("");
-  lines.push(chalk.bold("mcplint --eval") + chalk.dim(` — live agent usability (model: ${report.model})`));
+  lines.push(chalk.bold("mcpgrade --eval") + chalk.dim(` — live agent usability (model: ${report.model})`));
   lines.push(chalk.dim(`${report.taskCount} synthetic tasks`));
   lines.push("");
   lines.push(`  Tool selection    ${bar(report.selectionAccuracy)} ${pct(report.selectionAccuracy)}`);

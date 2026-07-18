@@ -38,8 +38,8 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MCP Server Agent-Usability Leaderboard · mcplint</title>
-<meta name="description" content="A-F agent-usability scores for ${rows.length} popular MCP servers, measured by mcplint.">
+<title>MCP Server Agent-Usability Leaderboard · mcpgrade</title>
+<meta name="description" content="A-F agent-usability scores for ${rows.length} popular MCP servers, measured by mcpgrade.">
 <style>
 :root{--bg:#fff;--text:#1a1a1a;--muted:#6b6b6b;--border:#e5e5e5;--code:#f6f6f6;color-scheme:light dark}
 @media(prefers-color-scheme:dark){:root{--bg:#121212;--text:#e8e8e8;--muted:#9a9a9a;--border:#2a2a2a;--code:#1e1e1e}}
@@ -63,7 +63,7 @@ a{color:#0b63c4}
 <body>
 <main>
 <h1>MCP Server Agent-Usability Leaderboard</h1>
-<div class="sub">${rows.length} servers · scanned ${date} by <a href="REPO_URL">mcplint</a> (static rules) · point-in-time snapshot · click headers to sort ·
+<div class="sub">${rows.length} servers · scanned ${date} by <a href="REPO_URL">mcpgrade</a> (static rules) · point-in-time snapshot · click headers to sort ·
 fixed your score? <a href="REPO_URL/issues">request a re-scan</a></div>
 <table id="lb">
 <thead><tr>

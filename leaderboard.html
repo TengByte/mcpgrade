@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MCP Server Agent-Usability Leaderboard · mcplint</title>
-<meta name="description" content="A-F agent-usability scores for 36 popular MCP servers, measured by mcplint.">
+<title>MCP Server Agent-Usability Leaderboard · mcpgrade</title>
+<meta name="description" content="A-F agent-usability scores for 36 popular MCP servers, measured by mcpgrade.">
 <style>
 :root{--bg:#fff;--text:#1a1a1a;--muted:#6b6b6b;--border:#e5e5e5;--code:#f6f6f6;color-scheme:light dark}
 @media(prefers-color-scheme:dark){:root{--bg:#121212;--text:#e8e8e8;--muted:#9a9a9a;--border:#2a2a2a;--code:#1e1e1e}}
@@ -28,8 +28,8 @@ a{color:#0b63c4}
 <body>
 <main>
 <h1>MCP Server Agent-Usability Leaderboard</h1>
-<div class="sub">36 servers · scanned 2026-07-18 by <a href="https://github.com/TengByte/mcplint">mcplint</a> (static rules) · point-in-time snapshot · click headers to sort ·
-fixed your score? <a href="https://github.com/TengByte/mcplint/issues">request a re-scan</a></div>
+<div class="sub">36 servers · scanned 2026-07-18 by <a href="https://github.com/TengByte/mcpgrade">mcpgrade</a> (static rules) · point-in-time snapshot · click headers to sort ·
+fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request a re-scan</a></div>
 <table id="lb">
 <thead><tr>
 <th>#</th><th class="name">Server</th><th>Grade</th><th>Score</th><th>Tools</th><th>Errors</th><th>Warnings</th><th>Desc</th><th>Schema</th><th>Naming</th><th>Token</th>
@@ -507,7 +507,7 @@ fixed your score? <a href="https://github.com/TengByte/mcplint/issues">request a
 </table>
 <p class="failed">Could not scan with dummy credentials (excluded, not graded): @stripe/mcp · @supabase/mcp-server-supabase · @modelcontextprotocol/server-redis</p>
 <footer>Scores weight descriptions 30% · schema 30% · naming 15% · token cost 15% · consistency 10%, density-normalized by tool count.
-Methodology &amp; rule rationale: <a href="https://github.com/TengByte/mcplint/blob/main/docs/rules.md">docs/rules.md</a></footer>
+Methodology &amp; rule rationale: <a href="https://github.com/TengByte/mcpgrade/blob/main/docs/rules.md">docs/rules.md</a></footer>
 </main>
 <script>
 document.querySelectorAll("#lb th").forEach((th,i)=>{
