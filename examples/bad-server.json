@@ -1,0 +1,67 @@
+{
+  "serverName": "example-bad-server",
+  "tools": [
+    {
+      "name": "process",
+      "description": "TODO: add description",
+      "inputSchema": { "type": "object" }
+    },
+    {
+      "name": "get_user",
+      "description": "Gets a user.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {}
+        }
+      }
+    },
+    {
+      "name": "get_users",
+      "description": "Gets a user.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "filter": { "type": "string", "description": "Filter must be one of active, inactive, or banned." },
+          "page": { "type": "integer", "description": "Page number, starting at 1." }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "name": "createInvoice",
+      "description": "Creates an invoice for a customer with the given line items and sends it for approval. Use when the user asks to bill a customer.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customer_id": { "type": "string", "description": "The customer's unique ID." },
+          "line_items": {
+            "type": "array",
+            "description": "Invoice line items.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sku": { "type": "string", "description": "Product SKU." },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": { "type": "string", "description": "Tag key." }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": ["customer_id", "line_items"]
+      }
+    }
+  ]
+}
