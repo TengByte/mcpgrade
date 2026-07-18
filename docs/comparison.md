@@ -25,7 +25,7 @@ nothing to violate client compatibility rules. Its findings: missing Cursor
 `title`s, missing `additionalProperties: false` for OpenAI strict mode,
 `integer` type, one missing param description (warning).
 
-**mcpgrade 0.1.0**: overall **F / 28**. The same `process` tool triggers
+**mcpgrade 0.1.0**: overall **F / 37**. The same `process` tool triggers
 placeholder-description, generic-verb-name, and missing-schema errors; the
 `get_user`/`get_users` pair triggers confusable-names and duplicate-description
 errors — the exact failures that make a model pick the wrong tool or guess
