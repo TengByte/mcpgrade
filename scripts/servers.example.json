@@ -1,0 +1,232 @@
+[
+  {
+    "name": "@modelcontextprotocol/server-everything",
+    "command": "npx -y @modelcontextprotocol/server-everything"
+  },
+  {
+    "name": "@modelcontextprotocol/server-memory",
+    "command": "npx -y @modelcontextprotocol/server-memory"
+  },
+  {
+    "name": "@modelcontextprotocol/server-filesystem",
+    "command": "npx -y @modelcontextprotocol/server-filesystem /tmp"
+  },
+  {
+    "name": "@modelcontextprotocol/server-sequential-thinking",
+    "command": "npx -y @modelcontextprotocol/server-sequential-thinking"
+  },
+  {
+    "name": "@modelcontextprotocol/server-github",
+    "command": "npx -y @modelcontextprotocol/server-github",
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "dummy"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-brave-search",
+    "command": "npx -y @modelcontextprotocol/server-brave-search",
+    "env": {
+      "BRAVE_API_KEY": "dummy"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-slack",
+    "command": "npx -y @modelcontextprotocol/server-slack",
+    "env": {
+      "SLACK_BOT_TOKEN": "xoxb-dummy",
+      "SLACK_TEAM_ID": "T000"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-google-maps",
+    "command": "npx -y @modelcontextprotocol/server-google-maps",
+    "env": {
+      "GOOGLE_MAPS_API_KEY": "dummy"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-postgres",
+    "command": "npx -y @modelcontextprotocol/server-postgres postgresql://user:pass@localhost:5432/db"
+  },
+  {
+    "name": "@modelcontextprotocol/server-puppeteer",
+    "command": "npx -y @modelcontextprotocol/server-puppeteer"
+  },
+  {
+    "name": "@upstash/context7-mcp",
+    "command": "npx -y @upstash/context7-mcp"
+  },
+  {
+    "name": "exa-mcp-server",
+    "command": "npx -y exa-mcp-server",
+    "env": {
+      "EXA_API_KEY": "dummy"
+    }
+  },
+  {
+    "name": "tavily-mcp",
+    "command": "npx -y tavily-mcp",
+    "env": {
+      "TAVILY_API_KEY": "tvly-dummy"
+    }
+  },
+  {
+    "name": "@notionhq/notion-mcp-server",
+    "command": "npx -y @notionhq/notion-mcp-server",
+    "env": {
+      "OPENAPI_MCP_HEADERS": "{\"Authorization\":\"Bearer dummy\",\"Notion-Version\":\"2022-06-28\"}"
+    }
+  },
+  {
+    "name": "firecrawl-mcp",
+    "command": "npx -y firecrawl-mcp",
+    "env": {
+      "FIRECRAWL_API_KEY": "fc-dummy"
+    }
+  },
+  {
+    "name": "@playwright/mcp",
+    "command": "npx -y @playwright/mcp"
+  },
+  {
+    "name": "@stripe/mcp",
+    "command": "npx -y @stripe/mcp --tools=all --api-key=sk_test_dummy"
+  },
+  {
+    "name": "@supabase/mcp-server-supabase",
+    "command": "npx -y @supabase/mcp-server-supabase --access-token dummy"
+  },
+  {
+    "name": "server-perplexity-ask",
+    "command": "npx -y server-perplexity-ask",
+    "env": {
+      "PERPLEXITY_API_KEY": "pplx-dummy"
+    }
+  },
+  {
+    "name": "figma-developer-mcp",
+    "command": "npx -y figma-developer-mcp --figma-api-key=dummy --stdio"
+  },
+  {
+    "name": "@hubspot/mcp-server",
+    "command": "npx -y @hubspot/mcp-server",
+    "env": {
+      "PRIVATE_APP_ACCESS_TOKEN": "pat-dummy"
+    }
+  },
+  {
+    "name": "@shopify/dev-mcp",
+    "command": "npx -y @shopify/dev-mcp"
+  },
+  {
+    "name": "airtable-mcp-server",
+    "command": "npx -y airtable-mcp-server",
+    "env": {
+      "AIRTABLE_API_KEY": "pat-dummy"
+    }
+  },
+  {
+    "name": "@openbnb/mcp-server-airbnb",
+    "command": "npx -y @openbnb/mcp-server-airbnb"
+  },
+  {
+    "name": "mongodb-mcp-server",
+    "command": "npx -y mongodb-mcp-server",
+    "env": {
+      "MDB_MCP_CONNECTION_STRING": "mongodb://localhost:27017/test"
+    }
+  },
+  {
+    "name": "@sentry/mcp-server",
+    "command": "npx -y @sentry/mcp-server",
+    "env": {
+      "SENTRY_ACCESS_TOKEN": "dummy",
+      "SENTRY_HOST": "sentry.io"
+    }
+  },
+  {
+    "name": "@apify/actors-mcp-server",
+    "command": "npx -y @apify/actors-mcp-server",
+    "env": {
+      "APIFY_TOKEN": "apify_api_dummy"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-gitlab",
+    "command": "npx -y @modelcontextprotocol/server-gitlab",
+    "env": {
+      "GITLAB_PERSONAL_ACCESS_TOKEN": "dummy"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-redis",
+    "command": "npx -y @modelcontextprotocol/server-redis redis://localhost:6379"
+  },
+  {
+    "name": "@modelcontextprotocol/server-everart",
+    "command": "npx -y @modelcontextprotocol/server-everart",
+    "env": {
+      "EVERART_API_KEY": "dummy"
+    }
+  },
+  {
+    "name": "@modelcontextprotocol/server-aws-kb-retrieval",
+    "command": "npx -y @modelcontextprotocol/server-aws-kb-retrieval",
+    "env": {
+      "AWS_ACCESS_KEY_ID": "AKIADUMMY",
+      "AWS_SECRET_ACCESS_KEY": "dummy",
+      "AWS_REGION": "us-east-1"
+    }
+  },
+  {
+    "name": "@executeautomation/playwright-mcp-server",
+    "command": "npx -y @executeautomation/playwright-mcp-server"
+  },
+  {
+    "name": "mcp-shrimp-task-manager",
+    "command": "npx -y mcp-shrimp-task-manager",
+    "env": {
+      "DATA_DIR": "/tmp/shrimp"
+    }
+  },
+  {
+    "name": "@suekou/mcp-notion-server",
+    "command": "npx -y @suekou/mcp-notion-server",
+    "env": {
+      "NOTION_API_TOKEN": "secret_dummy"
+    }
+  },
+  {
+    "name": "mcp-obsidian",
+    "command": "npx -y mcp-obsidian /tmp",
+    "env": {
+      "OBSIDIAN_API_KEY": "dummy"
+    }
+  },
+  {
+    "name": "@elastic/mcp-server-elasticsearch",
+    "command": "npx -y @elastic/mcp-server-elasticsearch",
+    "env": {
+      "ES_URL": "http://localhost:9200",
+      "ES_API_KEY": "dummy"
+    }
+  },
+  {
+    "name": "mcp-server-kubernetes",
+    "command": "npx -y mcp-server-kubernetes"
+  },
+  {
+    "name": "n8n-mcp",
+    "command": "npx -y n8n-mcp",
+    "env": {
+      "MCP_MODE": "stdio"
+    }
+  },
+  {
+    "name": "todoist-mcp-server",
+    "command": "npx -y todoist-mcp-server",
+    "env": {
+      "TODOIST_API_TOKEN": "dummy"
+    }
+  }
+]

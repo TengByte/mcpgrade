@@ -1,0 +1,24 @@
+name: "mcplint"
+description: "Lint your MCP server for agent usability — descriptions, schema design, naming, token cost"
+branding:
+  icon: "check-circle"
+  color: "blue"
+inputs:
+  target:
+    description: "Server target: http(s) URL, stdio command, or snapshot .json path"
+    required: true
+  fail-on:
+    description: "Fail the job on findings at/above this severity (error|warn|info)"
+    required: false
+    default: "error"
+  args:
+    description: "Extra CLI flags, e.g. --disable S008 --config .mcplintrc.json"
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: Run mcplint
+      shell: bash
+      run: |
+        npx --yes mcplint "${{ inputs.target }}" --fail-on "${{ inputs.fail-on }}" ${{ inputs.args }}
