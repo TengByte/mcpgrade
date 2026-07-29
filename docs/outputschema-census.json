@@ -1,0 +1,143 @@
+{
+  "scannedAt": "2026-07-29T16:38:51.809Z",
+  "serversAttempted": 16,
+  "serversReachable": 15,
+  "serversWithAnyOutputSchema": 5,
+  "serversWithAnyOutputSchemaNames": [
+    "server-everything",
+    "server-memory",
+    "server-filesystem",
+    "server-sequential-thinking",
+    "mongodb"
+  ],
+  "totalTools": 173,
+  "toolsWithOutputSchema": 47,
+  "pctToolsWithOutputSchema": 27.2,
+  "perServer": [
+    {
+      "name": "server-everything",
+      "status": "ok",
+      "tools": 13,
+      "withOutputSchema": 1,
+      "examples": [
+        "get-structured-content"
+      ]
+    },
+    {
+      "name": "server-memory",
+      "status": "ok",
+      "tools": 9,
+      "withOutputSchema": 9,
+      "examples": [
+        "create_entities",
+        "create_relations",
+        "add_observations"
+      ]
+    },
+    {
+      "name": "server-filesystem",
+      "status": "ok",
+      "tools": 14,
+      "withOutputSchema": 14,
+      "examples": [
+        "read_file",
+        "read_text_file",
+        "read_media_file"
+      ]
+    },
+    {
+      "name": "server-sequential-thinking",
+      "status": "ok",
+      "tools": 1,
+      "withOutputSchema": 1,
+      "examples": [
+        "sequentialthinking"
+      ]
+    },
+    {
+      "name": "server-github",
+      "status": "ok",
+      "tools": 26,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "server-slack",
+      "status": "ok",
+      "tools": 8,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "server-google-maps",
+      "status": "ok",
+      "tools": 7,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "context7",
+      "status": "ok",
+      "tools": 2,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "exa",
+      "status": "ok",
+      "tools": 2,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "firecrawl",
+      "status": "ok",
+      "tools": 26,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "mongodb",
+      "status": "ok",
+      "tools": 25,
+      "withOutputSchema": 22,
+      "examples": [
+        "aggregate-db",
+        "aggregate",
+        "collection-indexes"
+      ]
+    },
+    {
+      "name": "todoist",
+      "status": "ok",
+      "tools": 33,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "shrimp-task-manager",
+      "status": "unreachable"
+    },
+    {
+      "name": "elasticsearch",
+      "status": "ok",
+      "tools": 4,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "airbnb",
+      "status": "ok",
+      "tools": 2,
+      "withOutputSchema": 0,
+      "examples": []
+    },
+    {
+      "name": "perplexity-ask",
+      "status": "ok",
+      "tools": 1,
+      "withOutputSchema": 0,
+      "examples": []
+    }
+  ]
+}
