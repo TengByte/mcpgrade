@@ -73,3 +73,24 @@ Extrapolated full 36-server sweep: **≈ $1.5–2**. Cheaper than budgeted.
 - Refusal accuracy 100% — distractor design works.
 - Confusion pairs surfaced exactly the intuitive collisions
   (create_relations→create_entities, get_channel_history→list_channels).
+
+## Reproducibility: run fingerprints (added 2026-07-27)
+
+Every `--eval` result now carries an `envFingerprint` block pinning everything
+that can move a score:
+
+| Field | Why it matters |
+|---|---|
+| `server.catalogHash` | Content hash of the exact catalog the model saw — any schema drift invalidates comparison |
+| `server.toolCount`, `source` | Catalog size and where it came from |
+| `model.name`, `model.temperature` | Temperature is now explicitly pinned to 0 (previously provider-default, i.e. unrecorded) |
+| `harness.promptVersion` + `promptHash` | The selection prompt is versioned; a reworded prompt is a different experiment |
+| `harness.serializerVersion` | How the catalog is serialized into the request |
+| `taskPolicy.*` | `full-catalog-single-shot`, tasks per tool, distractor count, seed |
+| `runAt` | Timestamp |
+
+`comparable(a, b)` returns whether two runs can be compared at all. Published
+scores without a matching fingerprint should be treated as different
+experiments, not as a before/after.
+
+Prompted by [reader feedback on the launch post](https://dev.to/mads_hansen_27b33ebfee4c9/comment/3bjlc) (issue #3).

@@ -27,8 +27,40 @@ export interface ConfusionPair {
   count: number;
 }
 
+/**
+ * Everything that must be pinned for two eval results to be comparable.
+ * A score without this is not a measurement, it's an anecdote.
+ */
+export interface EnvFingerprint {
+  server: {
+    source: string;
+    name?: string;
+    toolCount: number;
+    /** Content hash of the exact catalog the model was shown. */
+    catalogHash: string;
+  };
+  model: {
+    name: string;
+    temperature: number | null;
+  };
+  harness: {
+    mcpgradeVersion: string | null;
+    promptVersion: number;
+    promptHash: string;
+    serializerVersion: number;
+  };
+  taskPolicy: {
+    catalogPolicy: string;
+    tasksPerTool: number;
+    distractors: number;
+    seed: number | null;
+  };
+  runAt: string;
+}
+
 export interface EvalReport {
   model: string;
+  envFingerprint: EnvFingerprint;
   taskCount: number;
   selectionAccuracy: number; // 0-1 over all tasks
   refusalCorrectness: number; // 0-1 over distractor tasks
@@ -41,6 +73,8 @@ export interface EvalReport {
 /** Minimal LLM client abstraction so the harness is model-agnostic. */
 export interface ModelClient {
   name: string;
+  /** Sampling temperature actually sent to the provider (null = provider default). */
+  temperature?: number | null;
   /** Returns the assistant's raw text for a single-turn prompt. */
   complete(system: string, user: string): Promise<string>;
   /** Cumulative token usage, when the provider reports it. */

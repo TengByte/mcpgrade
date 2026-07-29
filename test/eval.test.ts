@@ -73,3 +73,48 @@ describe("arg validation", () => {
     expect(validateArgs(schema, { q: "x", status: "banana" })).toBe(false);
   });
 });
+
+describe("env fingerprint", () => {
+  it("pins server, model, harness and task policy in the report", async () => {
+    const { runEval } = await import("../src/eval/runner.js");
+    const { mockClient } = await import("../src/eval/client.js");
+    const snapshot = {
+      source: "test://fixture",
+      serverName: "fixture",
+      tools: [
+        {
+          name: "search_issues",
+          description: "Search issues in a repository by query string.",
+          inputSchema: { type: "object", properties: { q: { type: "string" } }, required: ["q"] },
+        },
+      ],
+    };
+    const report = await runEval(snapshot as never, {
+      client: mockClient(),
+      tasksPerTool: 1,
+      distractors: 1,
+    });
+    const f = report.envFingerprint;
+    expect(f.server.toolCount).toBe(1);
+    expect(f.server.catalogHash).toMatch(/^[0-9a-f]{16}$/);
+    expect(f.model.temperature).toBe(0);
+    expect(f.harness.promptHash).toMatch(/^[0-9a-f]{16}$/);
+    expect(f.taskPolicy.catalogPolicy).toBe("full-catalog-single-shot");
+    expect(f.taskPolicy.tasksPerTool).toBe(1);
+    expect(Date.parse(f.runAt)).not.toBeNaN();
+  });
+
+  it("catalogHash changes when the catalog changes, and comparable() reflects it", async () => {
+    const { catalogHash, comparable, buildFingerprint } = await import("../src/eval/fingerprint.js");
+    expect(catalogHash("a")).not.toBe(catalogHash("b"));
+    const mk = (cat: string) =>
+      buildFingerprint({
+        snapshot: { source: "s", tools: [] } as never,
+        opts: { client: { name: "m", temperature: 0, complete: async () => "" }, tasksPerTool: 1, distractors: 1 },
+        serializedCatalog: cat,
+        systemPrompt: "p",
+      });
+    expect(comparable(mk("x"), mk("x"))).toBe(true);
+    expect(comparable(mk("x"), mk("y"))).toBe(false);
+  });
+});

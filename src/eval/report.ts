@@ -40,5 +40,18 @@ export function renderEval(report: EvalReport): string {
     }
     lines.push("");
   }
+  const f = report.envFingerprint;
+  lines.push(chalk.dim("  run fingerprint (results are only comparable across identical fingerprints)"));
+  lines.push(
+    chalk.dim(
+      `    catalog ${f.server.catalogHash} · ${f.server.toolCount} tools · model ${f.model.name} @ temp ${f.model.temperature ?? "provider-default"}`,
+    ),
+  );
+  lines.push(
+    chalk.dim(
+      `    prompt v${f.harness.promptVersion}/${f.harness.promptHash} · serializer v${f.harness.serializerVersion} · ${f.taskPolicy.catalogPolicy} · ${f.taskPolicy.tasksPerTool}×tool +${f.taskPolicy.distractors} distractors`,
+    ),
+  );
+  lines.push("");
   return lines.join("\n");
 }

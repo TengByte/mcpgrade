@@ -28,11 +28,14 @@ async function proxyAwareFetch(): Promise<FetchLike> {
 export function anthropicClient(opts: {
   apiKey: string;
   model?: string;
+  temperature?: number;
 }): ModelClient {
   const model = opts.model ?? "claude-haiku-4-5-20251001";
+  const temperature = opts.temperature ?? 0;
   const usage = { inputTokens: 0, outputTokens: 0 };
   return {
     name: model,
+    temperature,
     usage,
     async complete(system, user) {
       const doFetch = await proxyAwareFetch();
@@ -46,6 +49,7 @@ export function anthropicClient(opts: {
         body: JSON.stringify({
           model,
           max_tokens: 1024,
+          temperature,
           system,
           messages: [{ role: "user", content: user }],
         }),
@@ -72,10 +76,13 @@ export function openaiCompatClient(opts: {
   baseUrl: string; // e.g. https://api.deepseek.com/v1
   apiKey: string;
   model: string; // e.g. deepseek-chat
+  temperature?: number;
 }): ModelClient {
   const url = `${opts.baseUrl.replace(/\/$/, "")}/chat/completions`;
+  const temperature = opts.temperature ?? 0;
   return {
     name: opts.model,
+    temperature,
     async complete(system, user) {
       const doFetch = await proxyAwareFetch();
       const res = await doFetch(url, {
@@ -87,6 +94,7 @@ export function openaiCompatClient(opts: {
         body: JSON.stringify({
           model: opts.model,
           max_tokens: 1024,
+          temperature,
           messages: [
             { role: "system", content: system },
             { role: "user", content: user },
@@ -113,6 +121,7 @@ export function openaiCompatClient(opts: {
 export function mockClient(): ModelClient {
   return {
     name: "mock",
+    temperature: 0,
     async complete(system, user) {
       if (system.includes("generate realistic user requests") || system.includes("You generate realistic")) {
         const nameMatch = user.match(/"name":\s*"([^"]+)"/);

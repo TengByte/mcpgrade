@@ -1,4 +1,5 @@
 import type { ServerSnapshot } from "../types.js";
+import { buildFingerprint } from "./fingerprint.js";
 import { synthesizeTasks } from "./synthesize.js";
 import { validateArgs } from "./validate.js";
 import type {
@@ -9,7 +10,7 @@ import type {
   ToolChoice,
 } from "./types.js";
 
-const SELECT_SYSTEM = `You are an AI agent. You are given a catalog of tools and a user request.
+export const SELECT_SYSTEM = `You are an AI agent. You are given a catalog of tools and a user request.
 Pick the single best tool and arguments, or decline if no tool fits.
 Respond with JSON only, exactly one of:
 {"tool": "<tool_name>", "args": { ... }}
@@ -100,6 +101,12 @@ export async function runEval(
 
   return {
     model: opts.client.name,
+    envFingerprint: buildFingerprint({
+      snapshot,
+      opts,
+      serializedCatalog: catalog,
+      systemPrompt: SELECT_SYSTEM,
+    }),
     taskCount: total,
     selectionAccuracy: total ? correct / total : 0,
     refusalCorrectness: distractors.length ? refusedRight / distractors.length : 1,
