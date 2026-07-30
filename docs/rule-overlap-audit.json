@@ -1,0 +1,225 @@
+{
+  "auditedAt": "2026-07-30T04:02:48.045Z",
+  "declaredEntailments": [
+    [
+      "S008",
+      "D004"
+    ]
+  ],
+  "coOccurringPairs": [
+    {
+      "pair": "D004+S008",
+      "count": 75
+    },
+    {
+      "pair": "D007+S006",
+      "count": 7
+    },
+    {
+      "pair": "D001+S003",
+      "count": 4
+    },
+    {
+      "pair": "D007+N004",
+      "count": 4
+    },
+    {
+      "pair": "D006+D007",
+      "count": 2
+    },
+    {
+      "pair": "D007+S007",
+      "count": 2
+    },
+    {
+      "pair": "N004+S006",
+      "count": 2
+    },
+    {
+      "pair": "S006+S007",
+      "count": 2
+    },
+    {
+      "pair": "D001+S007",
+      "count": 2
+    },
+    {
+      "pair": "N004+S003",
+      "count": 1
+    },
+    {
+      "pair": "S003+S006",
+      "count": 1
+    },
+    {
+      "pair": "S003+S007",
+      "count": 1
+    },
+    {
+      "pair": "T001+T004",
+      "count": 1
+    },
+    {
+      "pair": "D001+N002",
+      "count": 1
+    },
+    {
+      "pair": "C001+D006",
+      "count": 1
+    },
+    {
+      "pair": "C001+D007",
+      "count": 1
+    },
+    {
+      "pair": "D007+S003",
+      "count": 1
+    }
+  ],
+  "perServer": [
+    {
+      "server": "github-mcp-server",
+      "tools": 26,
+      "findings": 77,
+      "subjects": 69,
+      "droppedAsEntailed": 5,
+      "scoreBefore": 67,
+      "gradeBefore": "D",
+      "scoreAfter": 68,
+      "gradeAfter": "D",
+      "delta": 1
+    },
+    {
+      "server": "firecrawl-fastmcp",
+      "tools": 26,
+      "findings": 199,
+      "subjects": 147,
+      "droppedAsEntailed": 46,
+      "scoreBefore": 58,
+      "gradeBefore": "F",
+      "scoreAfter": 63,
+      "gradeAfter": "D",
+      "delta": 5
+    },
+    {
+      "server": "Todoist MCP Server",
+      "tools": 33,
+      "findings": 120,
+      "subjects": 110,
+      "droppedAsEntailed": 3,
+      "scoreBefore": 67,
+      "gradeBefore": "D",
+      "scoreAfter": 67,
+      "gradeAfter": "D",
+      "delta": 0
+    },
+    {
+      "server": "MongoDB MCP Server",
+      "tools": 25,
+      "findings": 104,
+      "subjects": 85,
+      "droppedAsEntailed": 14,
+      "scoreBefore": 66,
+      "gradeBefore": "D",
+      "scoreAfter": 67,
+      "gradeAfter": "D",
+      "delta": 1
+    },
+    {
+      "server": "Slack MCP Server",
+      "tools": 8,
+      "findings": 8,
+      "subjects": 8,
+      "droppedAsEntailed": 0,
+      "scoreBefore": 95,
+      "gradeBefore": "A",
+      "scoreAfter": 95,
+      "gradeAfter": "A",
+      "delta": 0
+    },
+    {
+      "server": "memory-server",
+      "tools": 9,
+      "findings": 23,
+      "subjects": 16,
+      "droppedAsEntailed": 4,
+      "scoreBefore": 78,
+      "gradeBefore": "C",
+      "scoreAfter": 79,
+      "gradeAfter": "C",
+      "delta": 1
+    },
+    {
+      "server": "secure-filesystem-server",
+      "tools": 14,
+      "findings": 31,
+      "subjects": 26,
+      "droppedAsEntailed": 3,
+      "scoreBefore": 69,
+      "gradeBefore": "D",
+      "scoreAfter": 69,
+      "gradeAfter": "D",
+      "delta": 0
+    },
+    {
+      "server": "mcp-server/google-maps",
+      "tools": 7,
+      "findings": 13,
+      "subjects": 11,
+      "droppedAsEntailed": 0,
+      "scoreBefore": 95,
+      "gradeBefore": "A",
+      "scoreAfter": 95,
+      "gradeAfter": "A",
+      "delta": 0
+    },
+    {
+      "server": "Context7",
+      "tools": 2,
+      "findings": 4,
+      "subjects": 4,
+      "droppedAsEntailed": 0,
+      "scoreBefore": 70,
+      "gradeBefore": "C",
+      "scoreAfter": 70,
+      "gradeAfter": "C",
+      "delta": 0
+    },
+    {
+      "server": "Shrimp Task Manager",
+      "tools": 15,
+      "findings": 18,
+      "subjects": 17,
+      "droppedAsEntailed": 0,
+      "scoreBefore": 96,
+      "gradeBefore": "A",
+      "scoreAfter": 96,
+      "gradeAfter": "A",
+      "delta": 0
+    },
+    {
+      "server": "elasticsearch-mcp",
+      "tools": 4,
+      "findings": 5,
+      "subjects": 4,
+      "droppedAsEntailed": 0,
+      "scoreBefore": 94,
+      "gradeBefore": "A",
+      "scoreAfter": 94,
+      "gradeAfter": "A",
+      "delta": 0
+    },
+    {
+      "server": "airbnb",
+      "tools": 2,
+      "findings": 3,
+      "subjects": 2,
+      "droppedAsEntailed": 0,
+      "scoreBefore": 91,
+      "gradeBefore": "A",
+      "scoreAfter": 91,
+      "gradeAfter": "A",
+      "delta": 0
+    }
+  ]
+}
