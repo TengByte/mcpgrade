@@ -22,20 +22,20 @@ td.name,th.name{text-align:left;font-family:ui-monospace,Menlo,Consolas,monospac
 .grade.a{background:#1a7f37}.grade.b{background:#4d9375}.grade.c{background:#bf8700}.grade.d{background:#d4640c}.grade.f{background:#cf222e}
 .failed{color:var(--muted);font-size:.85rem;margin-top:1.2rem}
 footer{margin-top:2.5rem;color:var(--muted);font-size:.85rem}
-a{color:#0b63c4}
+td.version{color:var(--muted);font-size:.8rem;max-width:8rem;overflow:hidden;text-overflow:ellipsis}a{color:#0b63c4}
 </style>
 </head>
 <body>
 <main>
 <h1>MCP Server Agent-Usability Leaderboard</h1>
-<div class="sub">36 servers · scanned 2026-07-18 by <a href="https://github.com/TengByte/mcpgrade">mcpgrade</a> (static rules) · point-in-time snapshot · click headers to sort ·
+<div class="sub">36 servers · scanned 2026-07-18 by <a href="https://github.com/TengByte/mcpgrade">mcpgrade</a> (static rules) · per-row package versions · point-in-time snapshot · click headers to sort ·
 fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request a re-scan</a></div>
 <table id="lb">
 <thead><tr>
-<th>#</th><th class="name">Server</th><th>Grade</th><th>Score</th><th>Tools</th><th>Errors</th><th>Warnings</th><th>Desc</th><th>Schema</th><th>Naming</th><th>Token</th>
+<th>#</th><th class="name">Server</th><th>Grade</th><th>Score</th><th>Tools</th><th>Errors</th><th>Warnings</th><th>Desc</th><th>Schema</th><th>Naming</th><th>Token</th><th>Version</th>
 </tr></thead>
 <tbody>
-<tr>
+<tr id="server-modelcontextprotocol-server-everart">
 <td>1</td>
 <td class="name">@modelcontextprotocol/server-everart</td>
 <td><span class="grade a">A</span></td>
@@ -47,8 +47,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="100">100</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-brave-search">
 <td>2</td>
 <td class="name">@modelcontextprotocol/server-brave-search</td>
 <td><span class="grade a">A</span></td>
@@ -60,8 +60,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="100">100</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-exa-mcp-server">
 <td>3</td>
 <td class="name">exa-mcp-server</td>
 <td><span class="grade a">A</span></td>
@@ -73,8 +73,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="95">95</td>
 <td data-v="95">95</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-server-perplexity-ask">
 <td>4</td>
 <td class="name">server-perplexity-ask</td>
 <td><span class="grade a">A</span></td>
@@ -86,8 +86,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="90">90</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-shopify-dev-mcp">
 <td>5</td>
 <td class="name">@shopify/dev-mcp</td>
 <td><span class="grade a">A</span></td>
@@ -99,8 +99,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="94">94</td>
 <td data-v="100">100</td>
 <td data-v="92">92</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-aws-kb-retrieval">
 <td>6</td>
 <td class="name">@modelcontextprotocol/server-aws-kb-retrieval</td>
 <td><span class="grade a">A</span></td>
@@ -112,8 +112,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="100">100</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-mcp-shrimp-task-manager">
 <td>7</td>
 <td class="name">mcp-shrimp-task-manager</td>
 <td><span class="grade a">A</span></td>
@@ -125,8 +125,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="97">97</td>
 <td data-v="99">99</td>
 <td data-v="97">97</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-slack">
 <td>8</td>
 <td class="name">@modelcontextprotocol/server-slack</td>
 <td><span class="grade a">A</span></td>
@@ -138,8 +138,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="90">90</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-google-maps">
 <td>9</td>
 <td class="name">@modelcontextprotocol/server-google-maps</td>
 <td><span class="grade a">A</span></td>
@@ -151,8 +151,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="94">94</td>
 <td data-v="97">97</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-elastic-mcp-server-elasticsearch">
 <td>10</td>
 <td class="name">@elastic/mcp-server-elasticsearch</td>
 <td><span class="grade a">A</span></td>
@@ -164,8 +164,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="88">88</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-apify-actors-mcp-server">
 <td>11</td>
 <td class="name">@apify/actors-mcp-server</td>
 <td><span class="grade a">A</span></td>
@@ -177,8 +177,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="96">96</td>
 <td data-v="100">100</td>
 <td data-v="74">74</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-openbnb-mcp-server-airbnb">
 <td>12</td>
 <td class="name">@openbnb/mcp-server-airbnb</td>
 <td><span class="grade a">A</span></td>
@@ -190,8 +190,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="80">80</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-tavily-mcp">
 <td>13</td>
 <td class="name">tavily-mcp</td>
 <td><span class="grade a">A</span></td>
@@ -203,8 +203,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="78">78</td>
 <td data-v="78">78</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-figma-developer-mcp">
 <td>14</td>
 <td class="name">figma-developer-mcp</td>
 <td><span class="grade a">A</span></td>
@@ -216,8 +216,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="75">75</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-gitlab">
 <td>15</td>
 <td class="name">@modelcontextprotocol/server-gitlab</td>
 <td><span class="grade a">A</span></td>
@@ -229,8 +229,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="97">97</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-n8n-mcp">
 <td>16</td>
 <td class="name">n8n-mcp</td>
 <td><span class="grade b">B</span></td>
@@ -242,8 +242,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="71">71</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-sentry-mcp-server">
 <td>17</td>
 <td class="name">@sentry/mcp-server</td>
 <td><span class="grade b">B</span></td>
@@ -255,8 +255,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="68">68</td>
 <td data-v="100">100</td>
 <td data-v="91">91</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-executeautomation-playwright-mcp-server">
 <td>18</td>
 <td class="name">@executeautomation/playwright-mcp-server</td>
 <td><span class="grade b">B</span></td>
@@ -268,8 +268,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="98">98</td>
 <td data-v="94">94</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-playwright-mcp">
 <td>19</td>
 <td class="name">@playwright/mcp</td>
 <td><span class="grade b">B</span></td>
@@ -281,8 +281,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="90">90</td>
 <td data-v="91">91</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-hubspot-mcp-server">
 <td>20</td>
 <td class="name">@hubspot/mcp-server</td>
 <td><span class="grade b">B</span></td>
@@ -294,8 +294,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="48">48</td>
 <td data-v="100">100</td>
 <td data-v="93">93</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-puppeteer">
 <td>21</td>
 <td class="name">@modelcontextprotocol/server-puppeteer</td>
 <td><span class="grade b">B</span></td>
@@ -307,8 +307,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="99">99</td>
 <td data-v="99">99</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-mcp-server-kubernetes">
 <td>22</td>
 <td class="name">mcp-server-kubernetes</td>
 <td><span class="grade c">C</span></td>
@@ -320,8 +320,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="81">81</td>
 <td data-v="95">95</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-memory">
 <td>23</td>
 <td class="name">@modelcontextprotocol/server-memory</td>
 <td><span class="grade c">C</span></td>
@@ -333,8 +333,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="79">79</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-upstash-context7-mcp">
 <td>24</td>
 <td class="name">@upstash/context7-mcp</td>
 <td><span class="grade c">C</span></td>
@@ -346,8 +346,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="100">100</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-filesystem">
 <td>25</td>
 <td class="name">@modelcontextprotocol/server-filesystem</td>
 <td><span class="grade d">D</span></td>
@@ -359,8 +359,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="97">97</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-sequential-thinking">
 <td>26</td>
 <td class="name">@modelcontextprotocol/server-sequential-thinking</td>
 <td><span class="grade d">D</span></td>
@@ -372,8 +372,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="0">0</td>
 <td data-v="90">90</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-airtable-mcp-server">
 <td>27</td>
 <td class="name">airtable-mcp-server</td>
 <td><span class="grade d">D</span></td>
@@ -385,8 +385,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="96">96</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-mcp-obsidian">
 <td>28</td>
 <td class="name">mcp-obsidian</td>
 <td><span class="grade d">D</span></td>
@@ -398,8 +398,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="95">95</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-github">
 <td>29</td>
 <td class="name">@modelcontextprotocol/server-github</td>
 <td><span class="grade d">D</span></td>
@@ -411,8 +411,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="91">91</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-todoist-mcp-server">
 <td>30</td>
 <td class="name">todoist-mcp-server</td>
 <td><span class="grade d">D</span></td>
@@ -424,8 +424,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="92">92</td>
 <td data-v="97">97</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-everything">
 <td>31</td>
 <td class="name">@modelcontextprotocol/server-everything</td>
 <td><span class="grade d">D</span></td>
@@ -437,8 +437,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="88">88</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-mongodb-mcp-server">
 <td>32</td>
 <td class="name">mongodb-mcp-server</td>
 <td><span class="grade d">D</span></td>
@@ -450,8 +450,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="86">86</td>
 <td data-v="99">99</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-notionhq-notion-mcp-server">
 <td>33</td>
 <td class="name">@notionhq/notion-mcp-server</td>
 <td><span class="grade d">D</span></td>
@@ -463,8 +463,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="92">92</td>
 <td data-v="95">95</td>
 <td data-v="94">94</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-suekou-mcp-notion-server">
 <td>34</td>
 <td class="name">@suekou/mcp-notion-server</td>
 <td><span class="grade d">D</span></td>
@@ -476,8 +476,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="75">75</td>
 <td data-v="100">100</td>
 <td data-v="95">95</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-modelcontextprotocol-server-postgres">
 <td>35</td>
 <td class="name">@modelcontextprotocol/server-postgres</td>
 <td><span class="grade f">F</span></td>
@@ -489,8 +489,8 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="60">60</td>
 <td data-v="100">100</td>
 <td data-v="100">100</td>
-</tr>
-<tr>
+<td data-v="">—</td></tr>
+<tr id="server-firecrawl-mcp">
 <td>36</td>
 <td class="name">firecrawl-mcp</td>
 <td><span class="grade f">F</span></td>
@@ -502,7 +502,7 @@ fixed your score? <a href="https://github.com/TengByte/mcpgrade/issues">request 
 <td data-v="63">63</td>
 <td data-v="96">96</td>
 <td data-v="90">90</td>
-</tr>
+<td data-v="">—</td></tr>
 </tbody>
 </table>
 <p class="failed">Could not scan with dummy credentials (excluded, not graded): @stripe/mcp · @supabase/mcp-server-supabase · @modelcontextprotocol/server-redis</p>

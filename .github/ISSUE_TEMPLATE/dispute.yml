@@ -1,0 +1,74 @@
+name: Dispute a Score
+description: Challenge a specific rule violation found during a scan
+title: "dispute: [server-name] — rule [D001-F999]"
+labels: ["dispute", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us keep the leaderboard accurate!
+        Please fill out the details below so we can investigate quickly.
+
+  - type: input
+    id: server
+    attributes:
+      label: Server Name
+      description: The exact server name as shown in the leaderboard
+      placeholder: "@modelcontextprotocol/server-filesystem"
+    validations:
+      required: true
+
+  - type: input
+    id: scanned_version
+    attributes:
+      label: Scanned Version
+      description: The package version that was scanned (shown in the Version column)
+      placeholder: "1.2.3"
+    validations:
+      required: true
+
+  - type: input
+    id: rule
+    attributes:
+      label: Rule ID
+      description: The rule you believe is incorrect (e.g., D004, W001)
+      placeholder: "D004"
+    validations:
+      required: true
+
+  - type: input
+    id: tool
+    attributes:
+      label: Affected Tool
+      description: Which tool in the server is affected?
+      placeholder: "search_documents"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Why is this score incorrect?
+      description: Explain why the rule doesn't apply or was misapplied
+      placeholder: |
+        For example: "D004 flags my tool for missing a description,
+        but the description is present in the tool's docstring which
+        mcpgrade should be reading."
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Links to source code, screenshots, or other evidence
+      placeholder: |
+        - Link to source: https://github.com/...
+        - Screenshot: ...
+    validations:
+      required: false
+
+  - type: input
+    id: leaderboard_row
+    attributes:
+      label: Leaderboard Row Link
+      description: The anchor link to your server's row (click on the row in the leaderboard)
+      placeholder: "https://tengbyte.github.io/mcpgrade/leaderboard.html#server-my-server"
