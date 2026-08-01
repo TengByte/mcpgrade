@@ -80,7 +80,7 @@ describe("serve: catalog", () => {
 
 describe("--header parsing", () => {
   it("parses repeated flags and trims whitespace", async () => {
-    const { parseHeaders } = await import("../src/cli.js");
+    const { parseHeaders } = await import("../src/headers.js");
     expect(parseHeaders(["Authorization: Bearer abc", "X-Tenant:  acme "])).toEqual({
       Authorization: "Bearer abc",
       "X-Tenant": "acme",
@@ -88,20 +88,20 @@ describe("--header parsing", () => {
   });
 
   it("keeps colons inside the value (bearer tokens, URLs)", async () => {
-    const { parseHeaders } = await import("../src/cli.js");
+    const { parseHeaders } = await import("../src/headers.js");
     expect(parseHeaders(["X-Ref: https://example.com/a:b"])).toEqual({
       "X-Ref": "https://example.com/a:b",
     });
   });
 
   it("returns undefined when nothing is supplied", async () => {
-    const { parseHeaders } = await import("../src/cli.js");
+    const { parseHeaders } = await import("../src/headers.js");
     expect(parseHeaders()).toBeUndefined();
     expect(parseHeaders([])).toBeUndefined();
   });
 
   it("rejects malformed headers rather than silently dropping them", async () => {
-    const { parseHeaders } = await import("../src/cli.js");
+    const { parseHeaders } = await import("../src/headers.js");
     expect(() => parseHeaders(["Authorization Bearer abc"])).toThrow(/Expected "Name: Value"/);
     expect(() => parseHeaders([": novalue"])).toThrow();
   });
