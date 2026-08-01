@@ -108,7 +108,9 @@ Different tools, different questions. [mcp-lint](https://www.npmjs.com/package/m
 
 - [x] v0.1 — static lint engine, 24 rules, A–F scoring
 - [x] v0.2 — `--eval`: LLM-powered live testing — synthetic task generation, blind tool selection, argument validation, refusal accuracy, confusion pairs. Calibrated on real servers ([methodology](https://github.com/TengByte/mcpgrade/blob/main/docs/eval-calibration.md)); costs ~$0.05–0.2 per server on Haiku. Bring your own `ANTHROPIC_API_KEY`, or any OpenAI-compatible endpoint via `--eval-base-url` (DeepSeek, OpenRouter, ...); `--eval-mock` runs offline. Respects `HTTPS_PROXY`.
-- [ ] v0.3 — GitHub Action, dynamic badges, public leaderboard of popular MCP servers
+- [x] v0.3 — **`mcpgrade serve`**: runs as an MCP server so an agent can grade other servers (allowlisted launchers; the catalog is graded by mcpgrade in CI and must hold an A). Plus `envFingerprint` on every eval result — catalog hash, model, temperature, prompt version, task policy — so two scores are comparably or visibly incomparable.
+- [x] Also shipped: [GitHub Action](https://github.com/TengByte/mcpgrade/blob/main/action.yml) for CI gating, and a [public leaderboard](https://tengli.dev/mcp-leaderboard.html) of 36 popular servers.
+- [ ] v0.4 — the failure taxonomy work, driven by reader feedback: [four-outcome scoring](https://github.com/TengByte/mcpgrade/issues/1), [held-out task authoring](https://github.com/TengByte/mcpgrade/issues/2), [silent-vs-observable failures](https://github.com/TengByte/mcpgrade/issues/7), [cross-server collisions](https://github.com/TengByte/mcpgrade/issues/6), [multi-hop evaluation](https://github.com/TengByte/mcpgrade/issues/8), [rule-entailment dedup](https://github.com/TengByte/mcpgrade/issues/9). Dynamic badges when the scoring model settles.
 
 ## License
 
