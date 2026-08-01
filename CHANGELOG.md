@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 (2026-08-01)
+
+- Fix: README used relative paths for the demo GIF and doc links, which render
+  broken on npmjs.com. All now absolute.
+
 ## 0.3.0 (2026-07-31)
 
 - **`mcpgrade serve` — MCP server mode.** mcpgrade now runs as an MCP server so an

@@ -12,7 +12,7 @@ const program = new Command();
 program
   .name("mcpgrade")
   .description("Lighthouse for MCP servers — lint for agent usability, not just spec compliance")
-  .version("0.3.0");
+  .version("0.3.1");
 
 program
   .argument("[target]", "server URL (http/https), a local command, or a snapshot .json")

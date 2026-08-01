@@ -2,7 +2,7 @@
 
 > **Lighthouse for MCP servers.** Your server can be 100% spec-compliant and still fail agents — vague descriptions, token-bloated schemas, confusable tool names. mcpgrade scores what compliance checkers can't: whether an LLM can actually use your tools.
 
-![mcpgrade demo — grading a broken server (F/37) and the official memory server (C/78)](demo.gif)
+![mcpgrade demo — grading a broken server (F/37) and the official memory server (C/78)](https://raw.githubusercontent.com/TengByte/mcpgrade/main/demo.gif)
 
 ```bash
 npx mcpgrade https://your-server.example.com/mcp   # streamable HTTP
@@ -73,7 +73,7 @@ commands are restricted to an allowlist (`npx`, `node`, `python`, `python3`, `uv
 CLI has no such restriction.
 
 **Dogfooding.** The serve catalog is graded by mcpgrade in CI and must score an A
-with zero errors ([test/serve.test.ts](test/serve.test.ts)) — if a change drops the
+with zero errors ([test/serve.test.ts](https://github.com/TengByte/mcpgrade/blob/main/test/serve.test.ts)) — if a change drops the
 grade, the fix is the catalog, not the threshold. Current self-score:
 
 ```
@@ -102,12 +102,12 @@ I integrate first-party and third-party MCP connectors into a production AI agen
 
 ## mcpgrade vs mcp-lint
 
-Different tools, different questions. [mcp-lint](https://www.npmjs.com/package/mcp-lint) checks whether your tool schemas *parse correctly* across clients (Claude, Cursor, OpenAI strict mode, ...) — syntax-level compatibility. mcpgrade measures whether a model can actually *use* your tools — description quality, naming confusion, token economics, and live LLM tool-selection accuracy. A server can pass mcp-lint cleanly and still score an F here, and vice versa. They compose well: lint for compatibility, grade for usability. Full side-by-side with concrete outputs: [docs/comparison.md](docs/comparison.md).
+Different tools, different questions. [mcp-lint](https://www.npmjs.com/package/mcp-lint) checks whether your tool schemas *parse correctly* across clients (Claude, Cursor, OpenAI strict mode, ...) — syntax-level compatibility. mcpgrade measures whether a model can actually *use* your tools — description quality, naming confusion, token economics, and live LLM tool-selection accuracy. A server can pass mcp-lint cleanly and still score an F here, and vice versa. They compose well: lint for compatibility, grade for usability. Full side-by-side with concrete outputs: [docs/comparison.md](https://github.com/TengByte/mcpgrade/blob/main/docs/comparison.md).
 
 ## Roadmap
 
 - [x] v0.1 — static lint engine, 24 rules, A–F scoring
-- [x] v0.2 — `--eval`: LLM-powered live testing — synthetic task generation, blind tool selection, argument validation, refusal accuracy, confusion pairs. Calibrated on real servers ([methodology](docs/eval-calibration.md)); costs ~$0.05–0.2 per server on Haiku. Bring your own `ANTHROPIC_API_KEY`, or any OpenAI-compatible endpoint via `--eval-base-url` (DeepSeek, OpenRouter, ...); `--eval-mock` runs offline. Respects `HTTPS_PROXY`.
+- [x] v0.2 — `--eval`: LLM-powered live testing — synthetic task generation, blind tool selection, argument validation, refusal accuracy, confusion pairs. Calibrated on real servers ([methodology](https://github.com/TengByte/mcpgrade/blob/main/docs/eval-calibration.md)); costs ~$0.05–0.2 per server on Haiku. Bring your own `ANTHROPIC_API_KEY`, or any OpenAI-compatible endpoint via `--eval-base-url` (DeepSeek, OpenRouter, ...); `--eval-mock` runs offline. Respects `HTTPS_PROXY`.
 - [ ] v0.3 — GitHub Action, dynamic badges, public leaderboard of popular MCP servers
 
 ## License
