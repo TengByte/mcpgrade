@@ -11,24 +11,64 @@ export async function snapshotFromFile(path: string): Promise<ServerSnapshot> {
   return { source: path, serverName: raw.serverName, tools };
 }
 
-/** Connect to a live MCP server over streamable HTTP and take a snapshot. */
-export async function snapshotFromHttp(url: string): Promise<ServerSnapshot> {
+/**
+ * Connect to a live MCP server over HTTP and take a snapshot.
+ *
+ * Tries streamable HTTP first, then falls back to SSE — many hosted servers
+ * still only speak the older transport. Custom headers (auth tokens) are
+ * forwarded to both.
+ *
+ * Secrets note: headers are never stored on the snapshot or echoed in output.
+ */
+export async function snapshotFromHttp(
+  url: string,
+  headers?: Record<string, string>,
+): Promise<ServerSnapshot> {
   const { Client } = await import("@modelcontextprotocol/sdk/client/index.js");
-  const { StreamableHTTPClientTransport } = await import(
-    "@modelcontextprotocol/sdk/client/streamableHttp.js"
-  );
-  const client = new Client({ name: "mcpgrade", version: "0.1.0" });
-  const transport = new StreamableHTTPClientTransport(new URL(url));
-  await client.connect(transport);
+  const requestInit = headers && Object.keys(headers).length ? { headers } : undefined;
+
+  const connect = async (kind: "streamable" | "sse") => {
+    const client = new Client({ name: "mcpgrade", version: "0.3.1" });
+    let transport;
+    if (kind === "streamable") {
+      const { StreamableHTTPClientTransport } = await import(
+        "@modelcontextprotocol/sdk/client/streamableHttp.js"
+      );
+      transport = new StreamableHTTPClientTransport(new URL(url), { requestInit });
+    } else {
+      const { SSEClientTransport } = await import("@modelcontextprotocol/sdk/client/sse.js");
+      transport = new SSEClientTransport(new URL(url), {
+        requestInit,
+        eventSourceInit: requestInit
+          ? {
+              fetch: (input: string | URL | Request, init?: RequestInit) =>
+                fetch(input, { ...init, headers: { ...init?.headers, ...headers } }),
+            }
+          : undefined,
+      } as never);
+    }
+    await client.connect(transport);
+    try {
+      const res = await client.listTools();
+      return {
+        source: url,
+        serverName: client.getServerVersion()?.name,
+        tools: res.tools as ToolDef[],
+      };
+    } finally {
+      await client.close();
+    }
+  };
+
   try {
-    const res = await client.listTools();
-    return {
-      source: url,
-      serverName: client.getServerVersion()?.name,
-      tools: res.tools as ToolDef[],
-    };
-  } finally {
-    await client.close();
+    return await connect("streamable");
+  } catch (streamableError) {
+    try {
+      return await connect("sse");
+    } catch {
+      // Report the primary failure — the SSE attempt is a fallback, not the story.
+      throw streamableError;
+    }
   }
 }
 
@@ -62,11 +102,12 @@ export async function takeSnapshot(opts: {
   target?: string;
   stdio?: string;
   snapshot?: string;
+  headers?: Record<string, string>;
 }): Promise<ServerSnapshot> {
   if (opts.snapshot) return snapshotFromFile(opts.snapshot);
   if (opts.stdio) return snapshotFromStdio(opts.stdio);
   if (opts.target) {
-    if (/^https?:\/\//.test(opts.target)) return snapshotFromHttp(opts.target);
+    if (/^https?:\/\//.test(opts.target)) return snapshotFromHttp(opts.target, opts.headers);
     if (opts.target.endsWith(".json")) return snapshotFromFile(opts.target);
     return snapshotFromStdio(opts.target);
   }

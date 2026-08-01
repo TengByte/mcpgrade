@@ -8,6 +8,9 @@
 npx mcpgrade https://your-server.example.com/mcp   # streamable HTTP
 npx mcpgrade --stdio "node ./my-server.js"          # local stdio server
 npx mcpgrade --snapshot tools.json                  # saved tools/list output
+
+npx mcpgrade https://mcp-us.example.com/mcp/streamable \
+  --header "Authorization: Bearer $TOKEN"           # authenticated remote server
 ```
 
 Zero config. No API key. Report in seconds.
@@ -85,6 +88,24 @@ for describing a fixed value set in prose without an `enum`. The prose lists
 permitted *command prefixes* for an otherwise free-form string, so an enum is not
 expressible. Left in place rather than suppressed — the ruleset is opinionated by
 design, and disagreements belong in the open ([#10](https://github.com/TengByte/mcpgrade/issues)).
+
+## Authenticated remote servers
+
+Most hosted MCP servers require a bearer token. Pass headers with `--header`
+(repeatable), or set `MCPGRADE_HEADERS="Authorization: Bearer …; X-Tenant: acme"`:
+
+```bash
+npx mcpgrade https://your-host/mcp --header "Authorization: Bearer $TOKEN"
+```
+
+Streamable HTTP is tried first, with an automatic SSE fallback for servers on the
+older transport. mcpgrade only calls `tools/list` — it never invokes a tool unless
+you pass `--probe`.
+
+**Header values are treated as secrets**: they go to the transport and nowhere
+else — not the report, not `--json` output, not the eval `envFingerprint`. MCP
+serve mode accepts no headers at all, since there the target is chosen by a model
+and a model has no business handing out credentials.
 
 ## CI
 

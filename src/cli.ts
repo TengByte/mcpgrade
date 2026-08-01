@@ -7,17 +7,50 @@ import { runRules, staticRules } from "./rules/index.js";
 import { buildReport } from "./score.js";
 import { renderJson, renderTerminal } from "./report.js";
 
+/**
+ * Parses `--header "Name: Value"` occurrences plus the MCPGRADE_HEADERS env var
+ * (semicolon-separated) into a header map.
+ *
+ * Header values routinely carry bearer tokens, so they are only ever passed to
+ * the transport — never written to the snapshot, the report, or the eval
+ * fingerprint. MCP serve mode does not accept headers at all: there, the target
+ * is chosen by a model, and a model should not be handing out credentials.
+ */
+export function parseHeaders(flags?: string[]): Record<string, string> | undefined {
+  const raw = [
+    ...(process.env.MCPGRADE_HEADERS?.split(";") ?? []),
+    ...(flags ?? []),
+  ]
+    .map((h) => h.trim())
+    .filter(Boolean);
+  if (!raw.length) return undefined;
+  const headers: Record<string, string> = {};
+  for (const entry of raw) {
+    const i = entry.indexOf(":");
+    if (i <= 0) {
+      throw new Error(`Bad header "${entry}". Expected "Name: Value".`);
+    }
+    headers[entry.slice(0, i).trim()] = entry.slice(i + 1).trim();
+  }
+  return headers;
+}
+
 const program = new Command();
 
 program
   .name("mcpgrade")
   .description("Lighthouse for MCP servers — lint for agent usability, not just spec compliance")
-  .version("0.3.1");
+  .version("0.4.0");
 
 program
   .argument("[target]", "server URL (http/https), a local command, or a snapshot .json")
   .option("--stdio <command>", "spawn a local MCP server over stdio")
   .option("--snapshot <file>", "lint a saved tools/list JSON snapshot")
+  .option(
+    "--header <header>",
+    'HTTP header for authenticated remote servers, e.g. --header "Authorization: Bearer $TOKEN". Repeatable. Also read from MCPGRADE_HEADERS ("A: 1; B: 2").',
+    (value: string, previous: string[] = []) => [...previous, value],
+  )
   .option("--json", "machine-readable JSON output")
   .option("--fail-on <severity>", "exit 1 if findings at/above severity exist (error|warn|info)")
   .option("--disable <rules>", "comma-separated rule IDs to disable")
@@ -30,7 +63,12 @@ program
   .action(async (target: string | undefined, opts) => {
     try {
       const config = await loadConfig(opts.config);
-      const snapshot = await takeSnapshot({ target, stdio: opts.stdio, snapshot: opts.snapshot });
+      const snapshot = await takeSnapshot({
+        target,
+        stdio: opts.stdio,
+        snapshot: opts.snapshot,
+        headers: parseHeaders(opts.header),
+      });
       const disabled = [
         ...(config.disable ?? []),
         ...(opts.disable?.split(",").map((s: string) => s.trim()) ?? []),

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 (2026-08-01)
+
+- **`--header` for authenticated remote servers.** Most hosted MCP servers
+  (Zoom, Notion, Sentry, Atlassian, …) sit behind a bearer token, which made
+  them unscannable. `mcpgrade https://host/mcp --header "Authorization: Bearer $TOKEN"`,
+  repeatable, or via `MCPGRADE_HEADERS`. Header values never reach the report,
+  the JSON output or the eval fingerprint; serve mode does not accept them at all.
+- **Automatic SSE fallback** when a host does not speak streamable HTTP.
+
 ## 0.3.1 (2026-08-01)
 
 - Fix: README used relative paths for the demo GIF and doc links, which render
