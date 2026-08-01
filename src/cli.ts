@@ -12,7 +12,7 @@ const program = new Command();
 program
   .name("mcpgrade")
   .description("Lighthouse for MCP servers — lint for agent usability, not just spec compliance")
-  .version("0.1.0");
+  .version("0.3.0");
 
 program
   .argument("[target]", "server URL (http/https), a local command, or a snapshot .json")
@@ -25,7 +25,7 @@ program
   .option("--probe", "live-probe error quality: call tools with invalid args (stdio targets only)")
   .option("--eval", "run LLM-powered tool-selection eval (needs ANTHROPIC_API_KEY)")
   .option("--eval-model <model>", "model for --eval (default: claude-haiku-4-5-20251001)")
-  .option("--eval-base-url <url>", "OpenAI-compatible endpoint (DeepSeek/Qwen/OpenRouter/...); key via MCPGRADE_EVAL_API_KEY or OPENAI_API_KEY")
+  .option("--eval-base-url <url>", "OpenAI-compatible endpoint (DeepSeek/Qwen/OpenRouter/...); key via MCPLINT_EVAL_API_KEY or OPENAI_API_KEY")
   .option("--eval-mock", "run eval with the offline mock client (for testing the harness)")
   .action(async (target: string | undefined, opts) => {
     try {
@@ -62,8 +62,8 @@ program
           : opts.evalBaseUrl
             ? openaiCompatClient({
                 baseUrl: opts.evalBaseUrl,
-                apiKey: process.env.MCPGRADE_EVAL_API_KEY ?? process.env.OPENAI_API_KEY ?? (() => {
-                  throw new Error("--eval-base-url needs MCPGRADE_EVAL_API_KEY (or OPENAI_API_KEY)");
+                apiKey: process.env.MCPLINT_EVAL_API_KEY ?? process.env.OPENAI_API_KEY ?? (() => {
+                  throw new Error("--eval-base-url needs MCPLINT_EVAL_API_KEY (or OPENAI_API_KEY)");
                 })(),
                 model: opts.evalModel ?? (() => {
                   throw new Error("--eval-base-url needs --eval-model (e.g. deepseek-chat)");
@@ -98,6 +98,14 @@ program
       console.error(chalk.red(`mcpgrade: ${err instanceof Error ? err.message : err}`));
       process.exit(2);
     }
+  });
+
+program
+  .command("serve")
+  .description("run mcpgrade as an MCP server so an agent can grade other servers")
+  .action(async () => {
+    const { serve } = await import("./serve.js");
+    await serve();
   });
 
 program

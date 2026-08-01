@@ -46,6 +46,46 @@ target: examples/bad-server.json · 4 tools
     ...
 ```
 
+
+## MCP server mode
+
+mcpgrade also runs *as* an MCP server, so an agent can grade other servers on your behalf:
+
+```bash
+claude mcp add mcpgrade -- npx -y mcpgrade serve
+```
+
+Or add it manually:
+
+```json
+{
+  "mcpServers": {
+    "mcpgrade": { "command": "npx", "args": ["-y", "mcpgrade", "serve"] }
+  }
+}
+```
+
+Three tools, deliberately: `grade_mcp_server`, `explain_rule`, `list_grading_rules`.
+
+**Security.** In serve mode the target string is chosen by a model, so local launch
+commands are restricted to an allowlist (`npx`, `node`, `python`, `python3`, `uv`,
+`uvx`, `deno`, `bun`, `docker`). URLs and `.json` snapshots are always allowed. The
+CLI has no such restriction.
+
+**Dogfooding.** The serve catalog is graded by mcpgrade in CI and must score an A
+with zero errors ([test/serve.test.ts](test/serve.test.ts)) — if a change drops the
+grade, the fix is the catalog, not the threshold. Current self-score:
+
+```
+  A   96/100        3 tools · 0 errors · 1 warning
+```
+
+The one warning is a rule I disagree with on this catalog: `S005` flags `target`
+for describing a fixed value set in prose without an `enum`. The prose lists
+permitted *command prefixes* for an otherwise free-form string, so an enum is not
+expressible. Left in place rather than suppressed — the ruleset is opinionated by
+design, and disagreements belong in the open ([#10](https://github.com/TengByte/mcpgrade/issues)).
+
 ## CI
 
 ```bash

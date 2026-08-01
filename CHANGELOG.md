@@ -1,6 +1,24 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.3.0 (2026-07-31)
+
+- **`mcpgrade serve` — MCP server mode.** mcpgrade now runs as an MCP server so an
+  agent can grade other servers: `claude mcp add mcpgrade -- npx -y mcpgrade serve`.
+  Three tools: `grade_mcp_server`, `explain_rule`, `list_grading_rules`.
+  Local launch commands are restricted to an allowlist, since the target string is
+  model-chosen; URLs and snapshots are unrestricted. The CLI is unaffected.
+- **Dogfooding guard in CI.** The serve catalog is graded by mcpgrade itself and must
+  hold A with zero errors (currently A/96).
+- **`envFingerprint` in every eval result** (#3): catalog content hash, tool count,
+  model + temperature, versioned selection prompt with hash, serializer version,
+  task policy, timestamp — plus `comparable(a, b)`. Temperature was previously the
+  provider default and unrecorded; it is now pinned to 0 across all clients.
+- **Rule documentation is now a single source of truth** (`src/rule-docs.ts`,
+  generated from `docs/rules.md`), shared by the `rules` command and serve mode.
+- Docs: `docs/outputschema-census.md` (outputSchema adoption across 15 servers) and
+  `docs/rule-overlap-audit.md` (D004 entails S008; the double charge is regressive).
+
+## 0.1.0
 
 Initial release.
 
