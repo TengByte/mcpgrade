@@ -1,5 +1,28 @@
 # Changelog
 
+## Unreleased
+
+- **`--eval` scores five outcomes, not right/wrong** ([#1](https://github.com/TengByte/mcpgrade/issues/1),
+  suggested by Mads Hansen). Every task lands in one bucket: *correct call*,
+  *correct refusal*, *correct clarification*, *unsafe plausible action* (a confident
+  call when the right move was to decline or ask), or a harmless *miss*. A new
+  weighted `score` (0-100) counts an unsafe action as -2, so a server that turns
+  ambiguity into questions scores above one that silently picks a near-twin.
+  JSON output gains `outcomes` and `score`; the old fields are kept.
+- **Ambiguous tasks.** `--eval` now synthesizes near-twin tasks (a request that fits
+  two confusable tools equally) and missing-parameter tasks (a required value left
+  out). The model may answer `{"clarify": "..."}`; `PROMPT_VERSION` is 2 and
+  `taskPolicy.ambiguous` is in the fingerprint, so these runs are visibly
+  incomparable with earlier ones.
+- **Malformed replies never count as a refusal.** A distractor task only scores
+  `correct-refusal` for a valid, explicit decline (`{"tool": null}`); garbage or
+  contract-breaking output scores a harmless `miss` instead.
+- **Behaviour change:** `selectionAccuracy` is now computed over direct/paraphrase
+  tasks only. Previously refused distractors counted as "correct selections" and
+  distorted it, so the number changes on the same server (lower when the model
+  refuses distractors better than it picks tools, higher when it doesn't).
+- Shared `wordSet`/`jaccard` moved into `src/rules/util.ts`.
+
 ## 0.4.0 (2026-08-01)
 
 - **`--header` for authenticated remote servers.** Most hosted MCP servers

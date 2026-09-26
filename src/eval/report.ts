@@ -17,6 +17,18 @@ export function renderEval(report: EvalReport): string {
   lines.push(chalk.bold("mcpgrade --eval") + chalk.dim(` — live agent usability (model: ${report.model})`));
   lines.push(chalk.dim(`${report.taskCount} synthetic tasks`));
   lines.push("");
+  const scoreColor = report.score >= 90 ? chalk.green : report.score >= 70 ? chalk.yellow : chalk.red;
+  lines.push(`  Eval score  ${scoreColor(chalk.bold(`${report.score}/100`))}${chalk.dim("  (unsafe actions count double against you)")}`);
+  lines.push("");
+  const o = report.outcomes;
+  const row = (label: string, n: number, color: (s: string) => string) =>
+    lines.push(`  ${label.padEnd(24)} ${color(String(n).padStart(3))}${chalk.dim(` / ${report.taskCount}`)}`);
+  row("Correct call", o["correct-call"], chalk.green);
+  row("Correct refusal", o["correct-refusal"], chalk.green);
+  row("Correct clarification", o["correct-clarification"], chalk.green);
+  row("Missed (harmless)", o.miss, chalk.yellow);
+  row("Unsafe plausible action", o["unsafe-action"], o["unsafe-action"] ? chalk.red : chalk.green);
+  lines.push("");
   lines.push(`  Tool selection    ${bar(report.selectionAccuracy)} ${pct(report.selectionAccuracy)}`);
   lines.push(`  Argument validity ${bar(report.argValidity)} ${pct(report.argValidity)}`);
   lines.push(`  Refusal accuracy  ${bar(report.refusalCorrectness)} ${pct(report.refusalCorrectness)}`);
@@ -49,7 +61,7 @@ export function renderEval(report: EvalReport): string {
   );
   lines.push(
     chalk.dim(
-      `    prompt v${f.harness.promptVersion}/${f.harness.promptHash} · serializer v${f.harness.serializerVersion} · ${f.taskPolicy.catalogPolicy} · ${f.taskPolicy.tasksPerTool}×tool +${f.taskPolicy.distractors} distractors`,
+      `    prompt v${f.harness.promptVersion}/${f.harness.promptHash} · serializer v${f.harness.serializerVersion} · ${f.taskPolicy.catalogPolicy} · ${f.taskPolicy.tasksPerTool}×tool +${f.taskPolicy.distractors} distractors +${f.taskPolicy.ambiguous} twin/${f.taskPolicy.ambiguous} missing-param ambiguous`,
     ),
   );
   lines.push("");

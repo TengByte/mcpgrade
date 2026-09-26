@@ -90,6 +90,7 @@ program
           client,
           tasksPerTool: 3,
           distractors: 2,
+          ambiguous: 2,
         });
         console.log(opts.json ? JSON.stringify(evalReport, null, 2) : renderEval(evalReport));
         if (client.usage && (client.usage.inputTokens || client.usage.outputTokens)) {
