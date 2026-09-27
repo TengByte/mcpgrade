@@ -22,10 +22,12 @@ Respond with JSON only, exactly one of:
 /**
  * Parse the model's reply. A tool call wins over a clarification if both appear.
  *
- * `malformed` distinguishes a genuine, valid decline (`{"tool": null}`) from a
- * response that never engaged with the contract at all — no JSON, broken JSON,
- * or JSON with none of the three recognized shapes (e.g. `{}`). Only a valid
- * decline may be scored as a correct refusal; see `classify()` in outcome.ts.
+ * `malformed` distinguishes a genuine, valid decline from a response that never
+ * engaged with the contract at all — no JSON, broken JSON, or JSON with none of
+ * the three recognized shapes. A decline must match `{"tool": null}` exactly:
+ * any extra key (a stray `args`, an unrelated field) means the response didn't
+ * actually produce one of the exact shapes the prompt asks for, so it doesn't
+ * earn refusal credit — see `classify()` in outcome.ts.
  */
 export function parseChoice(raw: string): ToolChoice {
   const match = raw.match(/\{[\s\S]*\}/);
@@ -35,7 +37,13 @@ export function parseChoice(raw: string): ToolChoice {
     const hasTool = typeof obj.tool === "string";
     const hasClarify = !hasTool && typeof obj.clarify === "string" && obj.clarify.trim().length > 0;
     const isExplicitDecline =
-      !hasTool && !hasClarify && obj && typeof obj === "object" && "tool" in obj && obj.tool === null;
+      !hasTool &&
+      !hasClarify &&
+      obj &&
+      typeof obj === "object" &&
+      Object.keys(obj).length === 1 &&
+      "tool" in obj &&
+      obj.tool === null;
     return {
       toolName: hasTool ? obj.tool : null,
       args: obj.args && typeof obj.args === "object" ? obj.args : null,

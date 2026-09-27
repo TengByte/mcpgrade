@@ -231,6 +231,15 @@ describe("parseChoice", () => {
     expect(parseChoice('{"tool":"a","args":{}}').malformed).toBe(false);
   });
 
+  it("rejects a decline carrying extra fields, even ones from the schema itself", async () => {
+    const { parseChoice } = await import("../src/eval/runner.js");
+    // A stray, empty args key is still not the exact {"tool": null} shape the
+    // prompt asks for — accepting it would let contract-breaking output earn
+    // refusal credit, same failure mode as garbage text.
+    expect(parseChoice('{"tool":null,"args":{}}').malformed).toBe(true);
+    expect(parseChoice('{"tool":null,"junk":1}').malformed).toBe(true);
+  });
+
   it("a tool call wins over a clarification", async () => {
     const { parseChoice } = await import("../src/eval/runner.js");
     const c = parseChoice('{"tool":"a","args":{},"clarify":"hm?"}');
