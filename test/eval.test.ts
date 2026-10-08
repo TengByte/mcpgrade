@@ -3,6 +3,7 @@ import { runEval } from "../src/eval/runner.js";
 import { mockClient } from "../src/eval/client.js";
 import { validateArgs } from "../src/eval/validate.js";
 import type { ServerSnapshot } from "../src/types.js";
+import type { ModelClient } from "../src/eval/types.js";
 
 const snapshot: ServerSnapshot = {
   source: "test://eval",
@@ -116,5 +117,149 @@ describe("env fingerprint", () => {
       });
     expect(comparable(mk("x"), mk("x"))).toBe(true);
     expect(comparable(mk("x"), mk("y"))).toBe(false);
+  });
+});
+
+describe("four-outcome scoring (issue #1)", () => {
+  const twinSnapshot: ServerSnapshot = {
+    source: "test://twins",
+    tools: [
+      {
+        name: "get_status",
+        description: "Get the current status of a crawl job by its job id.",
+        inputSchema: {
+          type: "object",
+          properties: { job_id: { type: "string", description: "Job id." } },
+          required: ["job_id"],
+        },
+      },
+      {
+        name: "check_status",
+        description: "Check the current status of a crawl job by its job id.",
+        inputSchema: {
+          type: "object",
+          properties: { job_id: { type: "string", description: "Job id." } },
+          required: ["job_id"],
+        },
+      },
+      {
+        name: "create_invoice",
+        description: "Create a billing invoice for a customer account.",
+        inputSchema: {
+          type: "object",
+          properties: { customer: { type: "string", description: "Customer name." } },
+          required: ["customer"],
+        },
+      },
+    ],
+  };
+
+  /** The mock, except it never asks: any clarification becomes a confident call to the first tool. */
+  const guesser = (): ModelClient => {
+    const inner = mockClient();
+    return {
+      ...inner,
+      async complete(system, user) {
+        const raw = await inner.complete(system, user);
+        if (user.startsWith("Tool catalog:") && JSON.parse(raw).clarify) {
+          return JSON.stringify({ tool: "get_status", args: { job_id: "j1" } });
+        }
+        return raw;
+      },
+    };
+  };
+
+  const opts = { tasksPerTool: 3, distractors: 2, ambiguous: 1 };
+
+  it("synthesizes one near-twin and one missing-param task per mechanism", async () => {
+    const report = await runEval(twinSnapshot, { client: mockClient(), ...opts });
+    const amb = report.results.filter((r) => r.task.kind === "ambiguous");
+    expect(amb.map((r) => r.task.ambiguity).sort()).toEqual(["missing-param", "near-twin"]);
+    expect(amb.find((r) => r.task.ambiguity === "near-twin")!.task.candidates!.sort()).toEqual([
+      "check_status",
+      "get_status",
+    ]);
+    expect(report.taskCount).toBe(13); // 3 tools × 3 + 2 distractors + 2 ambiguous
+  });
+
+  it("scores a server that asks above one that silently guesses", async () => {
+    const asks = await runEval(twinSnapshot, { client: mockClient(), ...opts });
+    const guesses = await runEval(twinSnapshot, { client: guesser(), ...opts });
+    expect(asks.outcomes["correct-clarification"]).toBe(2);
+    expect(asks.outcomes["unsafe-action"]).toBe(0);
+    expect(guesses.outcomes["correct-clarification"]).toBe(0);
+    expect(guesses.outcomes["unsafe-action"]).toBe(2);
+    expect(asks.score).toBeGreaterThan(guesses.score);
+  });
+
+  it("reports outcome counts that sum to the task count", async () => {
+    const report = await runEval(twinSnapshot, { client: mockClient(), ...opts });
+    const sum = Object.values(report.outcomes).reduce((a, b) => a + b, 0);
+    expect(sum).toBe(report.taskCount);
+    expect(report.results.every((r) => r.outcome)).toBe(true);
+  });
+
+  it("adds no ambiguous tasks when not requested", async () => {
+    const report = await runEval(twinSnapshot, { client: mockClient(), tasksPerTool: 1, distractors: 0 });
+    expect(report.results.some((r) => r.task.kind === "ambiguous")).toBe(false);
+  });
+
+  it("gives no near-twin task for a catalog of distinct tools", async () => {
+    const report = await runEval(snapshot, { client: mockClient(), tasksPerTool: 1, distractors: 0, ambiguous: 1 });
+    expect(report.results.some((r) => r.task.ambiguity === "near-twin")).toBe(false);
+  });
+});
+
+describe("parseChoice", () => {
+  it("reads tool calls, clarifications, declines and garbage", async () => {
+    const { parseChoice } = await import("../src/eval/runner.js");
+    expect(parseChoice('{"tool":"a","args":{"x":1}}')).toMatchObject({ toolName: "a", args: { x: 1 } });
+    expect(parseChoice('{"clarify":"Which one?"}')).toMatchObject({ toolName: null, clarification: "Which one?" });
+    expect(parseChoice('{"tool":null}').clarification).toBeUndefined();
+    expect(parseChoice("no json here")).toMatchObject({ toolName: null, args: null });
+    expect(parseChoice('{"clarify":"   "}').clarification).toBeUndefined();
+  });
+
+  it("flags anything that isn't a recognized shape as malformed, not a valid decline", async () => {
+    const { parseChoice } = await import("../src/eval/runner.js");
+    expect(parseChoice("I cannot help with that").malformed).toBe(true); // no JSON at all
+    expect(parseChoice("{not json").malformed).toBe(true); // JSON.parse throws
+    expect(parseChoice("{}").malformed).toBe(true); // valid JSON, no recognized field
+    expect(parseChoice('{"foo":"bar"}').malformed).toBe(true);
+    expect(parseChoice('{"tool":null}').malformed).toBe(false); // explicit, valid decline
+    expect(parseChoice('{"clarify":"Which one?"}').malformed).toBe(false);
+    expect(parseChoice('{"tool":"a","args":{}}').malformed).toBe(false);
+  });
+
+  it("rejects a decline carrying extra fields, even ones from the schema itself", async () => {
+    const { parseChoice } = await import("../src/eval/runner.js");
+    // A stray, empty args key is still not the exact {"tool": null} shape the
+    // prompt asks for — accepting it would let contract-breaking output earn
+    // refusal credit, same failure mode as garbage text.
+    expect(parseChoice('{"tool":null,"args":{}}').malformed).toBe(true);
+    expect(parseChoice('{"tool":null,"junk":1}').malformed).toBe(true);
+  });
+
+  it("a tool call wins over a clarification", async () => {
+    const { parseChoice } = await import("../src/eval/runner.js");
+    const c = parseChoice('{"tool":"a","args":{},"clarify":"hm?"}');
+    expect(c.toolName).toBe("a");
+    expect(c.clarification).toBeUndefined();
+  });
+});
+
+describe("fingerprint with ambiguous tasks", () => {
+  it("bumps the prompt version and treats different ambiguous counts as incomparable", async () => {
+    const { comparable, buildFingerprint, PROMPT_VERSION } = await import("../src/eval/fingerprint.js");
+    expect(PROMPT_VERSION).toBe(2);
+    const mk = (ambiguous: number) =>
+      buildFingerprint({
+        snapshot: { source: "s", tools: [] } as never,
+        opts: { client: { name: "m", temperature: 0, complete: async () => "" }, tasksPerTool: 1, distractors: 1, ambiguous },
+        serializedCatalog: "c",
+        systemPrompt: "p",
+      });
+    expect(comparable(mk(2), mk(2))).toBe(true);
+    expect(comparable(mk(2), mk(0))).toBe(false);
   });
 });

@@ -6,7 +6,7 @@ import type { EnvFingerprint, EvalOptions } from "./types.js";
  * Bump when the selection system prompt changes in a way that could move
  * scores. Two results with different promptVersion are not comparable.
  */
-export const PROMPT_VERSION = 1;
+export const PROMPT_VERSION = 2; // v2: added the {"clarify": ...} response
 
 /**
  * Bump when the shape of the tool catalog handed to the model changes
@@ -58,6 +58,7 @@ export function buildFingerprint(args: {
       catalogPolicy: CATALOG_POLICY,
       tasksPerTool: opts.tasksPerTool,
       distractors: opts.distractors,
+      ambiguous: opts.ambiguous ?? 0,
       seed: opts.seed ?? null,
     },
     runAt: new Date().toISOString(),
@@ -74,6 +75,7 @@ export function comparable(a: EnvFingerprint, b: EnvFingerprint): boolean {
     a.harness.serializerVersion === b.harness.serializerVersion &&
     a.taskPolicy.catalogPolicy === b.taskPolicy.catalogPolicy &&
     a.taskPolicy.tasksPerTool === b.taskPolicy.tasksPerTool &&
-    a.taskPolicy.distractors === b.taskPolicy.distractors
+    a.taskPolicy.distractors === b.taskPolicy.distractors &&
+    a.taskPolicy.ambiguous === b.taskPolicy.ambiguous
   );
 }

@@ -26,6 +26,28 @@ export function similarity(a: string, b: string): number {
   return 1 - levenshtein(a, b) / max;
 }
 
+const STOPWORDS = new Set([
+  "a", "an", "the", "of", "in", "on", "to", "for", "and", "or", "with",
+  "is", "are", "be", "this", "that", "it", "by", "from", "as", "at",
+]);
+
+/** Lowercased content words (>2 chars, no stopwords) of a text. */
+export function wordSet(text: string): Set<string> {
+  return new Set(
+    text
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((w) => w.length > 2 && !STOPWORDS.has(w)),
+  );
+}
+
+export function jaccard(a: Set<string>, b: Set<string>): number {
+  if (a.size === 0 || b.size === 0) return 0;
+  let inter = 0;
+  for (const w of a) if (b.has(w)) inter++;
+  return inter / (a.size + b.size - inter);
+}
+
 export function schemaDepth(schema: JsonSchema | undefined, depth = 0): number {
   if (!schema || typeof schema !== "object") return depth;
   let max = depth;

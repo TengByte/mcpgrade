@@ -116,7 +116,8 @@ export function openaiCompatClient(opts: {
  * Deterministic mock client for tests and offline development.
  * - Task synthesis: emits templated requests derived from the tool name.
  * - Selection: picks the tool whose name's tokens overlap the request most;
- *   declines when overlap is zero (so distractors are refused).
+ *   declines when overlap is zero (so distractors are refused) and asks a
+ *   clarifying question on a tie or when the request says details are missing.
  */
 export function mockClient(): ModelClient {
   return {
@@ -133,6 +134,14 @@ export function mockClient(): ModelClient {
           `Could you ${words}?`,
         ]);
       }
+      if (system.includes("fits BOTH tools")) {
+        const names = [...user.matchAll(/"name":\s*"([^"]+)"/g)].map((m) => m[1].replace(/[-_]/g, " "));
+        return JSON.stringify([`Please ${names.join(" or ")} for me`]);
+      }
+      if (system.includes("OMITS the value")) {
+        const name = user.match(/"name":\s*"([^"]+)"/)?.[1] ?? "tool";
+        return JSON.stringify([`Please ${name.replace(/[-_]/g, " ")} for me (no details given)`]);
+      }
       if (system.includes("CANNOT be satisfied")) {
         return JSON.stringify([
           "Please book me a flight to the moon",
@@ -146,12 +155,22 @@ export function mockClient(): ModelClient {
         JSON.parse(catalogMatch[1]);
       const request = catalogMatch[2].toLowerCase();
       let best: { name: string; score: number } | null = null;
+      let tied = false;
       for (const t of tools) {
         const tokens = t.name.toLowerCase().split(/[-_\s]+/).filter((w) => w.length > 2);
         const score = tokens.filter((w) => request.includes(w)).length / Math.max(tokens.length, 1);
-        if (score > 0 && (!best || score > best.score)) best = { name: t.name, score };
+        if (score > 0 && (!best || score > best.score)) {
+          best = { name: t.name, score };
+          tied = false;
+        } else if (best && score === best.score) {
+          tied = true;
+        }
       }
       if (!best || best.score < 0.5) return JSON.stringify({ tool: null });
+      // Ask instead of guessing when two tools match equally, or the request says it lacks details.
+      if (tied || request.includes("no details given")) {
+        return JSON.stringify({ clarify: "Which one did you mean, and can you give me the details?" });
+      }
       const tool = tools.find((t) => t.name === best!.name)!;
       const args: Record<string, unknown> = {};
       for (const req of tool.inputSchema?.required ?? []) {
